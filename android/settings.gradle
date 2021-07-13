@@ -1,0 +1,4 @@
+include ':ca-maa-android-sdk-release'
+include ':ca-maa-android-sdk-release'// GENERATED FILE - DO NOT EDIT
+include ":"
+include ":src"
