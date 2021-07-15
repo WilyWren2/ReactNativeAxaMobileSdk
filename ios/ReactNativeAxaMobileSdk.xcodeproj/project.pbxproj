@@ -6,6 +6,10 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F9C4895026D6DE860E55F91B /* Pods_ReactNativeAxaMobileSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC756DAFEC9AA18CB34F09C8 /* Pods_ReactNativeAxaMobileSdk.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -20,6 +24,9 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libReactNativeAxaMobileSdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReactNativeAxaMobileSdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4576679C63F9ADC7121C1C37 /* Pods-ReactNativeAxaMobileSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeAxaMobileSdk.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeAxaMobileSdk/Pods-ReactNativeAxaMobileSdk.release.xcconfig"; sourceTree = "<group>"; };
+		68249ED591CF98231A38EFFF /* Pods-ReactNativeAxaMobileSdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeAxaMobileSdk.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeAxaMobileSdk/Pods-ReactNativeAxaMobileSdk.debug.xcconfig"; sourceTree = "<group>"; };
+		BC756DAFEC9AA18CB34F09C8 /* Pods_ReactNativeAxaMobileSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactNativeAxaMobileSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9C4895026D6DE860E55F91B /* Pods_ReactNativeAxaMobileSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +53,27 @@
 			isa = PBXGroup;
 			children = (
 				134814211AA4EA7D00B7C361 /* Products */,
+				C6CC1C8C148A0777235546E2 /* Pods */,
+				E090D29EC554586731A5F00D /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		C6CC1C8C148A0777235546E2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				68249ED591CF98231A38EFFF /* Pods-ReactNativeAxaMobileSdk.debug.xcconfig */,
+				4576679C63F9ADC7121C1C37 /* Pods-ReactNativeAxaMobileSdk.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E090D29EC554586731A5F00D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BC756DAFEC9AA18CB34F09C8 /* Pods_ReactNativeAxaMobileSdk.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,6 +83,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "ReactNativeAxaMobileSdk" */;
 			buildPhases = (
+				D7F980D48B6538ADFBE355DA /* [CP] Check Pods Manifest.lock */,
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
 				58B511D91A9E6C8500147676 /* CopyFiles */,
@@ -99,6 +128,31 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D7F980D48B6538ADFBE355DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReactNativeAxaMobileSdk-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		58B511D71A9E6C8500147676 /* Sources */ = {
@@ -224,6 +278,7 @@
 		};
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68249ED591CF98231A38EFFF /* Pods-ReactNativeAxaMobileSdk.debug.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -240,6 +295,7 @@
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4576679C63F9ADC7121C1C37 /* Pods-ReactNativeAxaMobileSdk.release.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
