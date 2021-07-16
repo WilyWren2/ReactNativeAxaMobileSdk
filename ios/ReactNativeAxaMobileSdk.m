@@ -14,62 +14,89 @@
 #import<CoreLocation/CoreLocation.h>
 #import <React/RCTConvert.h>
 
-typedef NS_OPTIONS(NSInteger, SDKOptions) {
-    SDKDefault                      = 0,
-    SDKLogLevelSilent               = (1 << 0),
-    SDKLogLevelVerbose              = (1 << 1),
-    SDKCheckProfileOnRestartOnly    = (1 << 2),
-    SDKUseNetworkProtocolSwizzling  = (1 << 3), // By default we use NSURLConnection and NSURLSession delegates
-                                                // to observe Network traffic.  This option adds the protocol
-                                                // support if our delegates miss anything
-    SDKNoNetworkSwizzling           = (1 << 4),
-    SDKNoWorkLightSwizzling         = (1 << 5),
-    SDKNoGeoLocationCapturing       = (1 << 6),
-    SDKCollectDeviceName            = (1 << 7), // It is App developer's responsibility to provide a disclaimer to
-                                                // the consumer that they are collecting this data.
-                                                // By default CA SDK will NOT collect the device name
-    SDKUIWebViewDelegate            = (1 << 8), // requires SDK build with private APIs
-    SDKFixedViewTitles              = (1 << 9),
-    SDKNoCrashReporting             = (1 << 10)
-};
+// For custom application version string to be read from bundle (info.plist) use "AXAAppShortVersionString"  as key in info.plist.
+
+/*
+ Custom Keys to override AXA SDK behavior , placed in App's Info.plist.
+ Key : "AXAAppShortVersionString";   ex : 7.7.2
+ Key : "AXACLLocationLevel";   String - one of the values :     "BestForNavigation" ,"NearestTenMeters" , "HundredMeters" ,"Kilometer" ,"ThreeKilometers"
+ Key : "AXACollectIp";  Boolean : True/False
+ Key : "AXAMaxUploadNetworkCallsLimit";  String  : 1 - 10
+ Key : "AXADisabledInterceptors";  Array : NSURLConnection ,NSURLSession ,UIActivityIndicatorView ,UIApplication , WKWebView , Gestures , Touch ; Note : Including UIApplication disables SDK.
+ Key : "AXANavigationThrottle" ; String - 1000 , time in milliseconds to throttle navigation collection;
+ Key : "AXAActiveSessionTimeOut" ; String, time in milliseconds to stop and start the new session when your app is a continuously active state
+ */
 
 @implementation RCTConvert (SDKOptionsExtensions)
-    RCT_ENUM_CONVERTER(SDKOptions,(@{}),
+    RCT_ENUM_CONVERTER(SDKOptions,(@{   @"SDKDefault"                       : 0,
+                                        @"SDKLogLevelSilent"                : (1 << 0),
+                                        @"SDKLogLevelVerbose"               : (1 << 1),
+                                        @"SDKCheckProfileOnRestartOnly"     : (1 << 2),
+                                        @"SDKUseNetworkProtocolSwizzling"   : (1 << 3), // By default we use NSURLConnection and NSURLSession delegates
+                                                                                        // to observe Network traffic.  This option adds the protocol
+                                                                                        // support if our delegates miss anything
+                                        @"SDKNoNetworkSwizzling"            : (1 << 4),
+                                        @"SDKNoWorkLightSwizzling"          : (1 << 5),
+                                        @"SDKNoGeoLocationCapturing"        : (1 << 6),
+                                        @"SDKCollectDeviceName"             : (1 << 7), // It is App developer's responsibility to provide a disclaimer to
+                                                                                        // the consumer that they are collecting this data.
+                                                                                        // By default CA SDK will NOT collect the device name
+                                        @"SDKUIWebViewDelegate"             : (1 << 8), // requires SDK build with private APIs
+                                        @"SDKFixedViewTitles"               : (1 << 9),
+                                        @"SDKNoCrashReporting"              : (1 << 10)
+                                        }),
                         SDKDefault, integerValue)
 @end
 @implementation RCTConvert (SDKErrorExtension)
-    RCT_ENUM_CONVERTER(SDKError, (@{ @"errorNone" : @(ErrorNone),
-                                       @"errorNoTransactionName"  : @(ErrorNoTransactionName),
-                                       @"errorTransactionInProgress"   : @(ErrorTransactionInProgress),
-                                       @"errorFailedToTakeScreenshot"  : @(ErrorFailedToTakeScreenshot),
-                                       @"errorInvalidValuesPassed"   : @(ErrorInvalidValuesPassed)}), 
-                       ErrorNone, integerValue)
+    RCT_ENUM_CONVERTER(SDKError, (@{    @"errorNone"                        : @(ErrorNone),
+                                        @"errorNoTransactionName"           : @(ErrorNoTransactionName),
+                                        @"errorTransactionInProgress"       : @(ErrorTransactionInProgress),
+                                        @"errorFailedToTakeScreenshot"      : @(ErrorFailedToTakeScreenshot),
+                                        @"errorInvalidValuesPassed"         : @(ErrorInvalidValuesPassed)}), 
+                        ErrorNone, integerValue)
+@end
+
+//Enums to be specified for the pinningMode during the SSL handshake
+@implementation RCTConvert (CAMDOSSLPinningModeExtension)
+    RCT_ENUM_CONVERTER(CAMDOSSLPinningMode, (@{ @"camdoSSLPinningModeNone"                      : @(CAMDOSSLPinningModeNone),
+                                                @"camdoSSLPinningModePublicKey"                 : @(CAMDOSSLPinningModePublicKey),
+                                                @"camdoSSLPinningModeCertificate"               : @(CAMDOSSLPinningModeCertificate),
+                                                @"camdoSSLPinningModeFingerPrintSHA1Signature"  : @(CAMDOSSLPinningModeFingerPrintSHA1Signature),
+                                                @"camdoSSLPinningModePublicKeyHash"             : @(CAMDOSSLPinningModePublicKeyHash)}), 
+                       CAMDOSSLPinningModeNone, integerValue)
 @end
 
 - (NSDictionary *)constantsToExport
 {
     return @{ @"errorNone" : @(ErrorNone),
-            @"errorNoTransactionName" : @(ErrorNoTransactionName),
-            @"errorTransactionInProgress" : @(ErrorTransactionInProgress),
-            @"errorFailedToTakeScreenshot" : @(ErrorFailedToTakeScreenshot),
-            @"errorInvalidValuesPassed" : @(ErrorInvalidValuesPassed),
-            @"camdoSSLPinningModeNone" : @(CAMDOSSLPinningModeNone),
-            @"camdoSSLPinningModePublicKey" : @(CAMDOSSLPinningModePublicKey),
-            @"camdoSSLPinningModeCertificate" : @(CAMDOSSLPinningModeCertificate),
-            @"camdoSSLPinningModeFingerPrintSHA1Signature" : @(CAMDOSSLPinningModeFingerPrintSHA1Signature),
-            @"camdoSSLPinningModePublicKeyHash" : @(CAMDOSSLPinningModePublicKeyHash) };
+            @"errorNoTransactionName"                       : @(ErrorNoTransactionName),
+            @"errorTransactionInProgress"                   : @(ErrorTransactionInProgress),
+            @"errorFailedToTakeScreenshot"                  : @(ErrorFailedToTakeScreenshot),
+            @"errorInvalidValuesPassed"                     : @(ErrorInvalidValuesPassed),
+            @"camdoSSLPinningModeNone"                      : @(CAMDOSSLPinningModeNone),
+            @"camdoSSLPinningModePublicKey"                 : @(CAMDOSSLPinningModePublicKey),
+            @"camdoSSLPinningModeCertificate"               : @(CAMDOSSLPinningModeCertificate),
+            @"camdoSSLPinningModeFingerPrintSHA1Signature"  : @(CAMDOSSLPinningModeFingerPrintSHA1Signature),
+            @"camdoSSLPinningModePublicKeyHash"             : @(CAMDOSSLPinningModePublicKeyHash),
+            @"SDKDefault"                                   : 0,
+            @"SDKLogLevelSilent"                            : (1 << 0),
+            @"SDKLogLevelVerbose"                           : (1 << 1),
+            @"SDKCheckProfileOnRestartOnly"                 : (1 << 2),
+            @"SDKUseNetworkProtocolSwizzling"               : (1 << 3), 
+            @"SDKNoNetworkSwizzling"                        : (1 << 4),
+            @"SDKNoWorkLightSwizzling"                      : (1 << 5),
+            @"SDKNoGeoLocationCapturing"                    : (1 << 6),
+            @"SDKCollectDeviceName"                         : (1 << 7),
+            @"SDKUIWebViewDelegate"                         : (1 << 8),
+            @"SDKFixedViewTitles"                           : (1 << 9),
+            @"SDKNoCrashReporting"                          : (1 << 10),
+            @"CAMAA_SCREENSHOT_QUALITY_HIGH"                : @(CAMAA_SCREENSHOT_QUALITY_HIGH),
+            @"CAMAA_SCREENSHOT_QUALITY_MEDIUM"              : @(CAMAA_SCREENSHOT_QUALITY_MEDIUM),
+            @"CAMAA_SCREENSHOT_QUALITY_LOW"                 : @(CAMAA_SCREENSHOT_QUALITY_LOW),
+            @"CAMAA_SCREENSHOT_QUALITY_DEFAULT"             : @(CAMAA_SCREENSHOT_QUALITY_DEFAULT),
+            @"CAMAA_CRASH_OCCURRED"                         : @"CAMAA_CRASH_OCCURRED",
+            @"CAMAA_UPLOAD_INITIATED"                       : @"CAMAA_UPLOAD_INITIATED"}; //Register for SDK data upload notification. The receiver is notified when SDK uploads the data to the Collector.
 };
-
-//Enums to be specified for the pinningMode during the SSL handshake
-@implementation RCTConvert (CAMDOSSLPinningModeExtension)
-    RCT_ENUM_CONVERTER(CAMDOSSLPinningMode, (@{ @"camdoSSLPinningModeNone" : @(CAMDOSSLPinningModeNone),
-                                       @"camdoSSLPinningModePublicKey"  : @(CAMDOSSLPinningModePublicKey),
-                                       @"camdoSSLPinningModeCertificate"   : @(CAMDOSSLPinningModeCertificate),
-                                       @"camdoSSLPinningModeFingerPrintSHA1Signature"  : @(CAMDOSSLPinningModeFingerPrintSHA1Signature),
-                                       @"camdoSSLPinningModePublicKeyHash"   : @(CAMDOSSLPinningModePublicKeyHash)}), 
-                       CAMDOSSLPinningModeNone, integerValue)
-@end
-
 
 
 @implementation ReactNativeAxaMobileSdk
