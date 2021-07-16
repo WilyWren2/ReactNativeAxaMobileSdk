@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED6382C326A15DCD00E33567 /* ReactNativeAxaMobileSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6382C126A15DCD00E33567 /* ReactNativeAxaMobileSdk.m */; };
 		F9C4895026D6DE860E55F91B /* Pods_ReactNativeAxaMobileSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC756DAFEC9AA18CB34F09C8 /* Pods_ReactNativeAxaMobileSdk.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,8 @@
 		4576679C63F9ADC7121C1C37 /* Pods-ReactNativeAxaMobileSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeAxaMobileSdk.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeAxaMobileSdk/Pods-ReactNativeAxaMobileSdk.release.xcconfig"; sourceTree = "<group>"; };
 		68249ED591CF98231A38EFFF /* Pods-ReactNativeAxaMobileSdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeAxaMobileSdk.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeAxaMobileSdk/Pods-ReactNativeAxaMobileSdk.debug.xcconfig"; sourceTree = "<group>"; };
 		BC756DAFEC9AA18CB34F09C8 /* Pods_ReactNativeAxaMobileSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactNativeAxaMobileSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED6382C126A15DCD00E33567 /* ReactNativeAxaMobileSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactNativeAxaMobileSdk.m; sourceTree = "<group>"; };
+		ED6382C226A15DCD00E33567 /* ReactNativeAxaMobileSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactNativeAxaMobileSdk.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +55,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				ED6382C226A15DCD00E33567 /* ReactNativeAxaMobileSdk.h */,
+				ED6382C126A15DCD00E33567 /* ReactNativeAxaMobileSdk.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				C6CC1C8C148A0777235546E2 /* Pods */,
 				E090D29EC554586731A5F00D /* Frameworks */,
@@ -64,7 +69,6 @@
 				68249ED591CF98231A38EFFF /* Pods-ReactNativeAxaMobileSdk.debug.xcconfig */,
 				4576679C63F9ADC7121C1C37 /* Pods-ReactNativeAxaMobileSdk.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -159,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED6382C326A15DCD00E33567 /* ReactNativeAxaMobileSdk.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
