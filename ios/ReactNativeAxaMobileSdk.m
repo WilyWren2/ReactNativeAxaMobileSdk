@@ -124,9 +124,7 @@ RCT_EXPORT_METHOD(initializeSDKWithOptions:(SDKOptions) options completionHandle
  */
 RCT_EXPORT_METHOD(enableSDK)
 {
-  dispatch_async(dispatch_get_main_queue(), ^{
-      [CAMDOReporter enableSDK];
-  });
+  [CAMDOReporter enableSDK];
 }
 
 /* Use this API to disable the SDK.  When disabled, SDK is completely out of the process
