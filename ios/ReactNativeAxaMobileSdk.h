@@ -1,4 +1,10 @@
-// ReactNativeAxaMobileSdk.h
+/*
+ *
+ * Copyright (c) 2013-2021 CA Technologies (A Broadcom Company)
+ * All rights reserved.
+ *
+ */
+
 
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
