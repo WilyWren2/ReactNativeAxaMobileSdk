@@ -9,7 +9,7 @@
  * iOS Native module bridge, that routes the calls to {@link CAMDOReporter} APIs.
  *
  * The React Native app (from its js files) will call this native module,
- * via the JavaScript Module wrapper ReactNativeAxaMobileSdk.js, to use the
+ * via the JavaScript Module wrapper ReactNativeAxaMobileSdkJSModule.js, to use the
  * AXA Custom metrics APIs.
  *
  */
