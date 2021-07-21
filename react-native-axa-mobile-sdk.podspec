@@ -18,11 +18,22 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => "9.0" }
   s.source       = { :git => "https://github.com/CA-Application-Performance-Management/ReactNativeAxaMobileSdk.git", :tag => "#{s.version}" }
 
-  s.source_files = "ios/**/*.{h,c,cc,cpp,m,mm,swift}"
+  s.preserve_paths = 'LICENSE', 'README.md', 'package.json', 'index.js'
+
   s.requires_arc = true
+  s.platform       = :ios, '8.0'
+  s.ios.deployment_target = '8.0'
+
+  s.source_files = 'ios/**/*.{h,c,cc,cpp,m,mm,swift}','ios/**/CAMobileAppAnalytics/*.h'
+  s.public_header_files = 'ios/**/CAMobileAppAnalytics/*.h'
+  s.resources = 'ios/**/CAMobileAppAnalytics/*.js'
+  s.vendored_libraries = 'ios/**/CAMobileAppAnalytics/*.a'
+  
+  s.libraries = 'c++', 'z', 'sqlite3'
+  s.frameworks = 'CoreLocation', 'SystemConfiguration', 'Foundation', 'UIKit', 'CoreGraphics', 'Security', 'CoreTelephony', 'WebKit', 'WatchConnectivity'
 
   s.dependency "React"
-  s.dependency 'CAMobileAppAnalytics'
+  # s.dependency 'CAMobileAppAnalytics'
   # ...
   # s.dependency "..."
 end
