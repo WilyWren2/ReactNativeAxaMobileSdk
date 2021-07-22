@@ -362,7 +362,10 @@ RCT_EXPORT_METHOD(addToApmHeader:(NSString *)data)
   [CAMDOReporter addToApmHeader:data];
 }
 
-/* Set your delegate instance to handle auth challenges.  Use it when using SDKUseNetworkProtocolSwizzling option
+/**
+ * Use this API to set your delegate instance to handle auth challenges.
+ * Use it when using SDKUseNetworkProtocolSwizzling option
+ *
  */
 RCT_EXPORT_METHOD(setNSURLSessionDelegate:(id)delegate)
 {
@@ -373,6 +376,9 @@ RCT_EXPORT_METHOD(setNSURLSessionDelegate:(id)delegate)
 /**
  * Use this API to set the ssl pinning mode and array of pinned values.
  * This method expects array of values depending on the pinningMode
+ *
+ * @param pinningMode is one of the CAMDOSSLPinning modes described below
+ * @param pinnedValues is an array as required by the pinning mode
  *
  * Supported pinning modes:
  * CAMDOSSLPinningModePublicKey OR CAMDOSSLPinningModeCertificate
@@ -424,7 +430,7 @@ RCT_EXPORT_METHOD(stopCurrentAndStartNewSession)
  * Completion block can be used to verify whether the transaction is started successfully or not
  *
  * @param transactionName is a string
- * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
  *
  * Successful execution of the method will have completed as YES and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain, 
@@ -464,7 +470,7 @@ RCT_EXPORT_METHOD(startApplicationTransactionWithName:(NSString *) transactionNa
  * Completion block can be used to verify whether transaction is stopped successfully or not
  *
  * @param transactionName is a string
- * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
  *
  * Successful execution of the method will have completed as YES and and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain,
@@ -483,7 +489,7 @@ RCT_EXPORT_METHOD(stopApplicationTransactionWithName:(NSString *) transactionNam
  *
  * @param transactionName is a string
  * @param failure is string.
- * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
  *
  * Successful execution of the method will have completed as YES and and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain,
@@ -501,6 +507,7 @@ RCT_EXPORT_METHOD(stopApplicationTransactionWithName:(NSString *) transactionNam
  * Use this API to provide feedback from the user after a crash
  * The App has to register for CAMAA_CRASH_OCCURRED notification
  * and collect the feedback from the user while handling the notification
+ * @param feedback is a string containing any customer feedback for the crash
  *
  */
 RCT_EXPORT_METHOD(setCustomerFeedback:(NSString *) feedback)
@@ -508,21 +515,23 @@ RCT_EXPORT_METHOD(setCustomerFeedback:(NSString *) feedback)
     [CAMDOReporter setCustomerFeedback: feedback];
 }
 
-/**
- * Use this API to set Location of the Customer/User
- * by passing postalCode and countryCode.
- *
- */
-RCT_EXPORT_METHOD(setCustomerLocation:(NSString *) zip andCountry:(NSString *) country)
-{
-  [CAMDOReporter setCustomerLocation:zip andCountry:country];
-}
-
 /* Set Location of the Customer/User by passing CLLocation (latitude & longitude).
  */
 RCT_EXPORT_METHOD(setCustomerLocation:(CLLocation *) location)
 {
-    [CAMDOReporter setCustomerLocation: location];
+  [CAMDOReporter setCustomerLocation: location];
+}
+
+/**
+ * Use this API to set Location of the Customer/User
+ * by passing postalCode and countryCode.
+ * @param postalCode is the country's postal code, e.g. zip code in US
+ * @param countryCode is the two letter international code for the country
+ *
+ */
+RCT_EXPORT_METHOD(setCustomerLocation:(NSString *) postalCode andCountry:(NSString *) countryCode)
+{
+  [CAMDOReporter setCustomerLocation:postalCode andCountry:countryCode];
 }
 
 /**
@@ -530,7 +539,7 @@ RCT_EXPORT_METHOD(setCustomerLocation:(CLLocation *) location)
  *
  * @param name for the screen name, cannot be nil.
  * @param quality of the image. The value should be between 0.0 and 1.0. The default is low quality.
- * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
  *
  * Successful execution of the method will have completed as YES and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain, 
@@ -558,12 +567,12 @@ RCT_EXPORT_METHOD(enableScreenShots:(BOOL) captureScreen)
 }
 
 /**
- * This method is to create custom app flow with dynamic views
- * 
- * @param name
- * @param loadTime
- * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
- * 
+ * Use this API to create custom app flow with dynamic views
+ *
+ * @param name is the name of the view loaded
+ * @param loadTime is the time it took to load the view
+ * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
+ *
  * Successful execution of the method will have completed as YES and error object is nil 
  * In case of failure the completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
@@ -576,13 +585,13 @@ RCT_EXPORT_METHOD(viewLoaded:(NSString *) name loadTime:(CGFloat) loadTime compl
 }
 
 /**
- * This method is to create custom app flow with dynamic views
- * 
- * @param name
- * @param loadTime
+ * Use this method is to create custom app flow with dynamic views
+ *
+ * @param name is the name of the view loaded
+ * @param loadTime is the time it took to load the view
  * @param captureScreen is a boolean value to enable/disable screen captures.
  * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
- * 
+ *
  * Successful execution of the method will have completed as YES and error object is nil 
  * In case of failure the completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
@@ -596,7 +605,7 @@ RCT_EXPORT_METHOD(viewLoaded:(NSString *) name loadTime:(CGFloat) loadTime scree
 
 /**
  * Use this API to set the name of a view to be ignored
- * @param viewName - Name of the view to be ignored
+ * @param viewName is Name of the view to be ignored
  * Screenshots and transitions of the views that are in ignore list are not captured
  */
 RCT_EXPORT_METHOD(ignoreView:(NSString *) viewName)
@@ -606,7 +615,7 @@ RCT_EXPORT_METHOD(ignoreView:(NSString *) viewName)
 
 /**
  * Use this API to provide a list of view names to be ignored.
- * @param viewNames - List of names of the views to be ignored.
+ * @param viewNames is a list (an Array) of names of the views to be ignored.
  * Screenshots and transitions of the views that are in the
  * ignore list are not captured
  *
@@ -630,17 +639,18 @@ RCT_EXPORT_METHOD(isScreenshotPolicyEnabled:(RCTResponseSenderBlock)callback)
 
 /**
  * Use this API to add a custom network event in the current session
- * 
- * @param url, string reprentation of the network URL
- * @param status, any NSInteger value
- * @param responseTime, any integer value
- * @param inBytes, any integer value
- * @param outBytes, any integer value
- * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
- * 
+ *
+ * @param url is a string reprentation of the network URL
+ * @param status is an NSInteger value indicating the status
+ * @param responseTime is an integer value representing the response time
+ * @param inBytes is an integer value representing the number of bytes input
+ * @param outBytes is an integer value representing the number of bytes output
+ * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
+ *
  * Successful execution of the method will have completed as YES and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
+ *
  */
 RCT_EXPORT_METHOD(logNetworkEvent:(NSString *) url withStatus:(NSInteger) status withResponseTime:(int64_t) responseTime withInBytes:(int64_t) inBytes withOutBytes:(int64_t) outBytes completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
@@ -655,7 +665,7 @@ RCT_EXPORT_METHOD(logNetworkEvent:(NSString *) url withStatus:(NSInteger) status
  * @param name is a string event name
  * @param value is a string event value
  * @param attributes is a Dictionary which can be used to send any extra parameters
- * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
  *
  * Successful exceution of the method will have completed as YES and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain,
@@ -664,7 +674,7 @@ RCT_EXPORT_METHOD(logNetworkEvent:(NSString *) url withStatus:(NSInteger) status
  */
 RCT_EXPORT_METHOD(logTextMetric:(NSString *) name withValue:(NSString *) value withAttributes:(nullable NSDictionary *) attributes completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
-    [CAMDOReporter logTextMetric: name withValue: value withAttributes: attributes completionHandler: ^(BOOL completed, NSError *error) {
+    [CAMDOReporter logTextMetric: name withValue: value withAttributes: (NSMutableDictionary *)attributes completionHandler: ^(BOOL completed, NSError *error) {
       completionBlock(@[@(completed), RCTNullIfNil(error)]);
     }];
 }
@@ -684,7 +694,7 @@ RCT_EXPORT_METHOD(logTextMetric:(NSString *) name withValue:(NSString *) value w
  */
 RCT_EXPORT_METHOD(logNumericMetric:(NSString *) name withValue:(double) value withAttributes:(nullable NSDictionary *) attributes completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
-    [CAMDOReporter logNumericMetric: name withValue: value withAttributes: attributes completionHandler: ^(BOOL completed, NSError *error) {
+    [CAMDOReporter logNumericMetric: name withValue: value withAttributes: (NSMutableDictionary *)attributes completionHandler: ^(BOOL completed, NSError *error) {
       completionBlock(@[@(completed), RCTNullIfNil(error)]);
     }];
 }
