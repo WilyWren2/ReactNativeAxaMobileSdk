@@ -1,5 +1,5 @@
 {
-  "name": "@broadcom/react-native-axa-mobile-sdk",
+  "name": "react-native-axa-mobile-sdk",
   "title": "React Native AXA Mobile Sdk",
   "version": "1.0.0",
   "description": "CA App Experience Analytic native SDK's react native supplement for using custom metrics",

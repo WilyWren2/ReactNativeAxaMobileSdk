@@ -5,7 +5,7 @@ require "json"
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
-  s.name         = "@broadcom/react-native-axa-mobile-sdk"
+  s.name         = "react-native-axa-mobile-sdk"
   s.version      = package["version"]
   s.summary      = package["description"]
   s.description  = <<-DESC
@@ -24,10 +24,10 @@ Pod::Spec.new do |s|
   s.platform       = :ios, '8.0'
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'ios/**/*.{h,c,cc,cpp,m,mm,swift}','ios/**/CAMobileAppAnalytics/*.h'
-  s.public_header_files = 'ios/**/CAMobileAppAnalytics/*.h'
-  s.resources = 'ios/**/CAMobileAppAnalytics/*.js'
-  s.vendored_libraries = 'ios/**/CAMobileAppAnalytics/*.a'
+  s.source_files = 'ios/*.{h,c,cc,cpp,m,mm,swift}','ios/CAMobileAppAnalytics/*.h'
+  s.public_header_files = 'ios/CAMobileAppAnalytics/*.h'
+  s.resources = 'ios/CAMobileAppAnalytics/*.js'
+  s.vendored_libraries = 'ios/CAMobileAppAnalytics/*.a'
   
   s.libraries = 'c++', 'z', 'sqlite3'
   s.frameworks = 'CoreLocation', 'SystemConfiguration', 'Foundation', 'UIKit', 'CoreGraphics', 'Security', 'CoreTelephony', 'WebKit', 'WatchConnectivity'
