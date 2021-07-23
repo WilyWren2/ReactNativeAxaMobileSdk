@@ -270,7 +270,9 @@ RCT_EXPORT_METHOD(deviceId:(RCTResponseSenderBlock)callback)
 }
 
 /**
- * Get the customer ID.  If it not set, this API returns nil
+ * Use this API to get the customer ID for this session.
+ *
+ * If the customer Id is not set, this API returns an empty string.
  * @param callback is a function which expects an string value
  */
 RCT_EXPORT_METHOD(customerId:(RCTResponseSenderBlock)callback)
@@ -280,7 +282,7 @@ RCT_EXPORT_METHOD(customerId:(RCTResponseSenderBlock)callback)
 }
 
 /**
- * Use this API to set the customer ID.
+ * Use this API to set the customer ID for this session.
  * @param customerID is a string containing the customer Id
  * @param callback is a function which expects an (SDKError value)
  * If an empty string is passed, the customer id is reset.
@@ -567,9 +569,9 @@ RCT_EXPORT_METHOD(enableScreenShots:(BOOL) captureScreen)
 }
 
 /**
- * Use this API to create custom app flow with dynamic views
+ * Use this API to create a custom app flow with dynamic views
  *
- * @param name is the name of the view loaded
+ * @param viewName is the name of the view loaded
  * @param loadTime is the time it took to load the view
  * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
  *
@@ -577,17 +579,17 @@ RCT_EXPORT_METHOD(enableScreenShots:(BOOL) captureScreen)
  * In case of failure the completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
  */
-RCT_EXPORT_METHOD(viewLoaded:(NSString *) name loadTime:(CGFloat) loadTime completionHandler:(RCTResponseSenderBlock) completionBlock)
+RCT_EXPORT_METHOD(viewLoaded:(NSString *) viewName loadTime:(CGFloat) loadTime completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
-    [CAMDOReporter viewLoaded: name loadTime: loadTime completionHandler: ^(BOOL completed, NSError *error) {
+    [CAMDOReporter viewLoaded: viewName loadTime: loadTime completionHandler: ^(BOOL completed, NSError *error) {
       completionBlock(@[@(completed), RCTNullIfNil(error)]);
     }];
 }
 
 /**
- * Use this method is to create custom app flow with dynamic views
+ * Use this API to create a custom app flow with dynamic views
  *
- * @param name is the name of the view loaded
+ * @param viewName is the name of the view loaded
  * @param loadTime is the time it took to load the view
  * @param captureScreen is a boolean value to enable/disable screen captures.
  * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
@@ -596,9 +598,9 @@ RCT_EXPORT_METHOD(viewLoaded:(NSString *) name loadTime:(CGFloat) loadTime compl
  * In case of failure the completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
  */
-RCT_EXPORT_METHOD(viewLoaded:(NSString *) name loadTime:(CGFloat) loadTime screenShot:(BOOL) screenCapture completionHandler:(RCTResponseSenderBlock) completionBlock)
+RCT_EXPORT_METHOD(viewLoaded:(NSString *) viewName loadTime:(CGFloat) loadTime screenShot:(BOOL) screenCapture completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
-    [CAMDOReporter viewLoaded: name loadTime: loadTime screenShot: screenCapture completionHandler: ^(BOOL completed, NSError *error) {
+    [CAMDOReporter viewLoaded: viewName loadTime: loadTime screenShot: screenCapture completionHandler: ^(BOOL completed, NSError *error) {
       completionBlock(@[@(completed), RCTNullIfNil(error)]);
     }];
 }
@@ -660,10 +662,10 @@ RCT_EXPORT_METHOD(logNetworkEvent:(NSString *) url withStatus:(NSInteger) status
 }
 
 /**
- * Use this API to add a custom text event in the current session
+ * Use this API to add a custom text metric in the current session
  *
- * @param name is a string event name
- * @param value is a string event value
+ * @param metricName is a string metric name
+ * @param metricValue is a string metric value
  * @param attributes is a Dictionary which can be used to send any extra parameters
  * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
  *
@@ -672,18 +674,18 @@ RCT_EXPORT_METHOD(logNetworkEvent:(NSString *) url withStatus:(NSInteger) status
  * code and localizedDescription.
  *
  */
-RCT_EXPORT_METHOD(logTextMetric:(NSString *) name withValue:(NSString *) value withAttributes:(nullable NSDictionary *) attributes completionHandler:(RCTResponseSenderBlock) completionBlock)
+RCT_EXPORT_METHOD(logTextMetric:(NSString *) metricName withValue:(NSString *) metricValue withAttributes:(nullable NSDictionary *) attributes completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
-    [CAMDOReporter logTextMetric: name withValue: value withAttributes: (NSMutableDictionary *)attributes completionHandler: ^(BOOL completed, NSError *error) {
+    [CAMDOReporter logTextMetric: metricName withValue: metricValue withAttributes: (NSMutableDictionary *)attributes completionHandler: ^(BOOL completed, NSError *error) {
       completionBlock(@[@(completed), RCTNullIfNil(error)]);
     }];
 }
 
 /**
- * Use this API to add a custom numeric event of type double in the current session
+ * Use this API to add a custom numeric metric of type double in the current session
  *
- * @param name is a string event name
- * @param value is a double event value
+ * @param metricName is a string metric name
+ * @param metricValue is a double metric value
  * @param attributes is a Dictionary which can be used to send any extra parameters
  * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock.
  *
@@ -692,9 +694,9 @@ RCT_EXPORT_METHOD(logTextMetric:(NSString *) name withValue:(NSString *) value w
  * code and localizedDescription.
  *
  */
-RCT_EXPORT_METHOD(logNumericMetric:(NSString *) name withValue:(double) value withAttributes:(nullable NSDictionary *) attributes completionHandler:(RCTResponseSenderBlock) completionBlock)
+RCT_EXPORT_METHOD(logNumericMetric:(NSString *) metricName withValue:(double) metricValue withAttributes:(nullable NSDictionary *) attributes completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
-    [CAMDOReporter logNumericMetric: name withValue: value withAttributes: (NSMutableDictionary *)attributes completionHandler: ^(BOOL completed, NSError *error) {
+    [CAMDOReporter logNumericMetric: metricName withValue: metricValue withAttributes: (NSMutableDictionary *)attributes completionHandler: ^(BOOL completed, NSError *error) {
       completionBlock(@[@(completed), RCTNullIfNil(error)]);
     }];
 }
@@ -709,12 +711,12 @@ RCT_EXPORT_METHOD(logNumericMetric:(NSString *) name withValue:(double) value wi
  *  the Key 'CAMDOResponseKey' which holds the URLResponse details
  *  the key 'CAMDOTotalUploadedEvents' which holds the total number of events uploaded
  * error object is nil if the API call is completed, otherwise an error
+ *
  */
-//TODO: Need to use threading: because uploadEvents operation might take a long time to complete
-RCT_EXPORT_METHOD(uploadEventsWithCompletionHandler:(RCTResponseSenderBlock) completionBlock)
+RCT_EXPORT_METHOD(uploadEvents:(RCTResponseSenderBlock) callback)
 {
     [CAMDOReporter uploadEventsWithCompletionHandler: ^(NSDictionary *response, NSError *error) {
-      completionBlock(@[RCTNullIfNil(response), RCTNullIfNil(error)]);
+      callback(@[RCTNullIfNil(response), RCTNullIfNil(error)]);
     }];
 }
 @end
