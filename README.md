@@ -139,6 +139,21 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 </details>
 
+## Updation
+
+Follow these steps to updgrade the `react native axa mobile sdk` in your project
+
+1. Run the following command from your React Native project directory
+
+    `$ yarn upgrade react-native-axa-mobile-sdk`
+    
+    or
+    
+    `$ npm update react-native-axa-mobile-sdk --save`
+
+2. Run `$ pod update` command from the `ios` folder.
+
+
 ## Usage
 ```javascript
 import ReactNativeAxaMobileSdk from 'react-native-axa-mobile-sdk';
