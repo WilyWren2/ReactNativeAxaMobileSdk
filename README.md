@@ -24,7 +24,7 @@ Check out our [documentation](https://techdocs.broadcom.com/content/broadcom/tec
 
 Follow these steps to integrate the `react native axa mobile sdk` in your project
 
-#### Automatic installation
+### Automatic installation
 1. Run the following command from your React Native project directory
 
     `$ yarn add react-native-axa-mobile-sdk`
@@ -35,8 +35,25 @@ Follow these steps to integrate the `react native axa mobile sdk` in your projec
 2. Run the following command for automatic linking
 
     `$ react-native link react-native-axa-mobile-sdk`
+3. iOS Setup 
+    * Podfile update
+    
+    If you're already using Cocoapods, goto `ios` folder from your project and specify the below pod on a single line inside your target block in a Podfile
+       
+       ```
+       pod 'react-native-axa-mobile-sdk', path: '../node_modules/react-native-axa-mobile-sdk'
+       ```
+        
+    Then, run the following command using the command prompt from the `ios` folder of your project
 
-#### Manual installation
+        ```
+        pod install
+        ```
+    
+    * Drag & Drop the downloaded `xxx_camdo.plist` file into the Supporting files
+
+
+### Manual installation
 
 
 <details>
@@ -46,6 +63,22 @@ Follow these steps to integrate the `react native axa mobile sdk` in your projec
 2. Go to `node_modules` ➜ `react-native-axa-mobile-sdk` and add `ReactNativeAxaMobileSdk.xcodeproj`
 3. In XCode, in the project navigator, select your project. Add `libReactNativeAxaMobileSdk.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 4. Run your project (`Cmd+R`)<
+
+5. Podfile update
+
+    If you're already using Cocoapods, goto `ios` folder from your project and specify the below pod on a single line inside your target block in a Podfile
+   
+   ```
+   pod 'react-native-axa-mobile-sdk', path: '../node_modules/react-native-axa-mobile-sdk'
+   ```
+    
+    Then, run the following command using the command prompt from the `ios` folder of your project
+
+    ```
+    pod install
+    ```
+
+6. Drag & Drop the downloaded `xxx_camdo.plist` file into the Supporting files
 </details>
 
 
@@ -65,9 +98,6 @@ Follow these steps to integrate the `react native axa mobile sdk` in your projec
       compile project(':react-native-test-sdk')
       ```
 </details>
-
-
-3. Drag & Drop the downloaded `xxx_camdo.plist` file into the Supporting files
 
 
 ## Initialising the SDK in your Source code
