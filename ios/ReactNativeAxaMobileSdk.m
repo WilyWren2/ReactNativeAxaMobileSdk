@@ -161,8 +161,8 @@ NSString * CAMAAErrorString(NSError *error) {
   if (!error) {
     return [NSString string].copy;
   }
-  return [NSString stringWithFormat:@"Error: %ld Domain: %@, %@",
-          (long)error.code, error.domain, error.userInfo].copy;
+  return [NSString stringWithFormat:@"%@: %ld %@",
+          error.domain, (long)error.code, error.userInfo[@"NSLocalizedDescription"]].copy;
 }
 
 /**
@@ -440,7 +440,7 @@ RCT_EXPORT_METHOD(stopCurrentAndStartNewSession)
  *
  */
 
-RCT_EXPORT_METHOD(startApplicationTransactionWithName:(NSString *) transactionName completionHandler:(RCTResponseSenderBlock) completionBlock)
+RCT_EXPORT_METHOD(startApplicationTransactionWithNameFoo:(NSString *) transactionName completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
     [CAMDOReporter startApplicationTransactionWithName: transactionName completionHandler: ^(BOOL completed, NSError *error) {
       completionBlock(@[@(completed), RCTNullIfNil(error)]);
@@ -460,11 +460,17 @@ RCT_EXPORT_METHOD(startApplicationTransactionWithName:(NSString *) transactionNa
  * code and localizedDescription.
  *
  */
-RCT_EXPORT_METHOD(startApplicationTransactionWithName:(NSString *) transactionName  service:(NSString *)serviceName completionHandler:(RCTResponseSenderBlock) completionBlock)
+RCT_EXPORT_METHOD(startApplicationTransaction:(NSString *) transactionName  service:(NSString *)serviceName completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
-    [CAMDOReporter startApplicationTransactionWithName: transactionName service: serviceName completionHandler: ^(BOOL completed, NSError *error) {
-      completionBlock(@[@(completed), RCTNullIfNil(error)]);
-    }];
+  void (^completion)(BOOL completed, NSError *error) =  ^(BOOL completed, NSError *error) {
+    completionBlock(@[@(completed), CAMAAErrorString(error)]);
+  };
+//  if (serviceName) {
+  [CAMDOReporter startApplicationTransactionWithName: transactionName service: serviceName completionHandler:completion];
+//  }
+//  else {
+//    [CAMDOReporter startApplicationTransactionWithName: transactionName completionHandler: completion];
+//  }
 }
 
 /**
