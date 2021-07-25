@@ -35,29 +35,6 @@
 
 #pragma mark - Enum Values
 
-// Enums for SDK Initialization Options
-@implementation RCTConvert (SDKOptionsExtensions)
-RCT_ENUM_CONVERTER(SDKOptions,
-    (@{ @"SDKDefault"                       : @0,
-        @"SDKLogLevelSilent"                : @(1 << 0),
-        @"SDKLogLevelVerbose"               : @(1 << 1),
-        @"SDKCheckProfileOnRestartOnly"     : @(1 << 2),
-        @"SDKUseNetworkProtocolSwizzling"   : @(1 << 3), // By default we use NSURLConnection and NSURLSession delegates
-        // to observe Network traffic.  This option adds the protocol
-        // support if our delegates miss anything
-        @"SDKNoNetworkSwizzling"            : @(1 << 4),
-        @"SDKNoWorkLightSwizzling"          : @(1 << 5),
-        @"SDKNoGeoLocationCapturing"        : @(1 << 6),
-        @"SDKCollectDeviceName"             : @(1 << 7), // It is App developer's responsibility to provide a disclaimer to
-        // the consumer that they are collecting this data.
-        // By default CA SDK will NOT collect the device name
-        @"SDKUIWebViewDelegate"             : @(1 << 8), // requires SDK build with private APIs
-        @"SDKFixedViewTitles"               : @(1 << 9),
-        @"SDKNoCrashReporting"              : @(1 << 10)
-     }),
-    SDKDefault, integerValue)
-@end
-
 // Enums for SDK Errors
 @implementation RCTConvert (SDKErrorExtension)
 RCT_ENUM_CONVERTER(SDKError,
@@ -90,6 +67,7 @@ RCT_EXPORT_MODULE()
 /* Note: For native iOS all callbacks return an RCTResponseSenderBlock,
  * which is effectively an array of values.
  * Please reference the README.md file for further details.
+ *
  */
 
 #pragma mark - React Exports
@@ -102,19 +80,6 @@ RCT_EXPORT_MODULE()
     @"ErrorTransactionInProgress"                   : @(ErrorTransactionInProgress),
     @"ErrorFailedToTakeScreenshot"                  : @(ErrorFailedToTakeScreenshot),
     @"ErrorInvalidValuesPassed"                     : @(ErrorInvalidValuesPassed),
-
-    @"SDKDefault"                                   : @(SDKDefault),
-    @"SDKLogLevelSilent"                            : @(SDKLogLevelSilent),
-    @"SDKLogLevelVerbose"                           : @(SDKLogLevelVerbose),
-    @"SDKCheckProfileOnRestartOnly"                 : @(SDKCheckProfileOnRestartOnly),
-    @"SDKUseNetworkProtocolSwizzling"               : @(SDKUseNetworkProtocolSwizzling),
-    @"SDKNoNetworkSwizzling"                        : @(SDKNoNetworkSwizzling),
-    @"SDKNoWorkLightSwizzling"                      : @(SDKNoWorkLightSwizzling),
-    @"SDKNoGeoLocationCapturing"                    : @(SDKNoGeoLocationCapturing),
-    @"SDKCollectDeviceName"                         : @(SDKCollectDeviceName),
-    @"SDKUIWebViewDelegate"                         : @(SDKUIWebViewDelegate),
-    @"SDKFixedViewTitles"                           : @(SDKFixedViewTitles),
-    @"SDKNoCrashReporting"                          : @(SDKNoCrashReporting),
 
     @"CAMDOSSLPinningModeNone"                      : @(CAMDOSSLPinningModeNone),
     @"CAMDOSSLPinningModePublicKey"                 : @(CAMDOSSLPinningModePublicKey),
@@ -137,11 +102,13 @@ RCT_EXPORT_MODULE()
  * if our module needs to be initialized on the main thread.
  * Otherwise we will see a warning that in the future our module may be initialized
  *  on a background thread unless we explicitly opt out with + requiresMainQueueSetup:
+ *
  */
 + (BOOL)requiresMainQueueSetup
 {
   return YES;  // only do this if our module initialization relies on calling UIKit!
 }
+
 
 #pragma mark - Sample Method Call
 
@@ -181,67 +148,10 @@ NSArray * CAMAADict2Array(NSDictionary *dict) {
 #pragma mark - APIs
 
 /**
- * Use this API to initialize the APM SDK.
- * This call should be made as early as possible in the application life cycle.
- * Typically, it is made at the beginning of didFinishLaunchingWithOptions in
- * the AppDelegate class
- *
- * @param options of the type SDKOptions.
- * @param configDetails is an array of alternating key,value pairs - from the CAMDO plist
- * @param completionHandler is a function which expects (BOOL completed, String error)
- *
- * Successful execution of the method will have completed as YES and error object is nil
- * In case of failure the completed is set to NO and errorString with domain, code and
- * localizedDescription.
- *
- */
-RCT_EXPORT_METHOD(initializeSDKWithOptions:(SDKOptions) options configDetails:(NSDictionary *)configDetails completionHandler:(RCTResponseSenderBlock)callback)
-{
-    [CAMDOReporter initializeSDKWithOptions:options configDetails:configDetails completionHandler:^(BOOL completed, NSError *error) {
-      // callback here
-      if (callback) {
-        callback(@[ @(completed), CAMAAErrorString(error)] );
-      }
-    }];
-}
-
-/**
- * Use this API to initialize the APM SDK.
- * This call should be made as early as possible in the application life cycle.
- * Typically, it is made at the beginning of didFinishLaunchingWithOptions in
- * the AppDelegate class
- *
- * @param options of the type SDKOptions.
- * @param completionHandler is a function which expects (BOOL completed, String error)
- *
- * Successful execution of the method will have completed as YES and error object is nil
- * In case of failure the completed is set to NO and errorString with domain, code and
- * localizedDescription.
- *
- */
-RCT_EXPORT_METHOD(initializeSDKWithOptions:(SDKOptions) options completionHandler:(RCTResponseSenderBlock) callback)
-{
-    [CAMDOReporter initializeSDKWithOptions:options completionHandler:^(BOOL completed, NSError *error) {
-      // callback here
-      if (callback) {
-        callback(@[ @(completed), CAMAAErrorString(error)] );
-      }
-    }];
-}
-
-/**
- * Use this API to enable SDK.  SDK is enabled by default
- * You need to call this API only if you called disableSDK earlier
- */
-RCT_EXPORT_METHOD(enableSDK)
-{
-  [CAMDOReporter enableSDK];
-}
-
-/**
- * Use this API to disable the SDK.  
+ * Use this API to disable the SDK.
  * When disabled, the SDK no longer does any tracking of the application,
  * or user interaction.
+ *
  */
 RCT_EXPORT_METHOD(disableSDK)
 {
@@ -249,9 +159,21 @@ RCT_EXPORT_METHOD(disableSDK)
 }
 
 /**
+ * Use this API to enable SDK.
+ * The SDK is enabled by default. You need to call this API
+ * only if you called disableSDK earlier.
+ *
+ */
+RCT_EXPORT_METHOD(enableSDK)
+{
+  [CAMDOReporter enableSDK];
+}
+
+/**
  * Use this API to determine if the SDK is enabled or not.
  * @param callback is a function which expects a boolean value
  * Returns a boolean value.
+ *
  */
 RCT_EXPORT_METHOD(isSDKEnabled:(RCTResponseSenderBlock)callback)
 {
@@ -262,6 +184,7 @@ RCT_EXPORT_METHOD(isSDKEnabled:(RCTResponseSenderBlock)callback)
 /**
  * Use this API to get the unique device ID generated by the SDK
  * @param callback is a function which expects an string value
+ *
  */
 RCT_EXPORT_METHOD(deviceId:(RCTResponseSenderBlock)callback)
 {
@@ -274,6 +197,7 @@ RCT_EXPORT_METHOD(deviceId:(RCTResponseSenderBlock)callback)
  *
  * If the customer Id is not set, this API returns an empty string.
  * @param callback is a function which expects an string value
+ *
  */
 RCT_EXPORT_METHOD(customerId:(RCTResponseSenderBlock)callback)
 {
@@ -343,15 +267,14 @@ RCT_EXPORT_METHOD(isInPrivateZone:(RCTResponseSenderBlock)callback)
 /**
  * Use this API to get the SDK computed APM header in key value format.
  * @param callback is a function which expects an (array of alternating key, value pairs)
- * Returns nil if apm header cannot be computed
+ * Returns null if apm header cannot be computed
  *
  */
-RCT_EXPORT_METHOD(apmHeader:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(getAPMHeader:(RCTResponseSenderBlock)callback)
 {
     NSDictionary *apmHeader = [CAMDOReporter apmHeader];
-    callback(@[apmHeader]);
+    callback(@[RCTNullIfNil(apmHeader)]);
 }
-
 
 /**
  * Use this API to add custom data to the SDK computed APM header.
@@ -359,7 +282,7 @@ RCT_EXPORT_METHOD(apmHeader:(RCTResponseSenderBlock)callback)
  * data will be appended to the header separated by a semicolon (;).
  *
  */
-RCT_EXPORT_METHOD(addToApmHeader:(NSString *)data)
+RCT_EXPORT_METHOD(addToAPMHeader:(NSString *)data)
 {
   [CAMDOReporter addToApmHeader:data];
 }
@@ -373,7 +296,6 @@ RCT_EXPORT_METHOD(setNSURLSessionDelegate:(id)delegate)
 {
   [CAMDOReporter setNSURLSessionDelegate:delegate];
 }
-
 
 /**
  * Use this API to set the ssl pinning mode and array of pinned values.
@@ -400,7 +322,7 @@ RCT_EXPORT_METHOD(setSSLPinningMode:(CAMDOSSLPinningMode) pinningMode withValues
 
 /**
  * Use this API to stop the current session.
- * No data will be logged until the startSession API is called again
+ * No data will be logged until the startSession API is called
  *
  */
 RCT_EXPORT_METHOD(stopCurrentSession)
@@ -420,40 +342,20 @@ RCT_EXPORT_METHOD(startNewSession)
 
 /**
  * Convenience API to stop the current session in progress and start a new session
+ * Equivalent to calling stopCurrentSession() and startNewSession()
  */
 RCT_EXPORT_METHOD(stopCurrentAndStartNewSession)
 {
     [CAMDOReporter stopCurrentAndStartNewSession];
 }
 
-
 /**
- * Use this API to start a transaction with a name
- * Completion block can be used to verify whether the transaction is started successfully or not
- *
- * @param transactionName is a string
- * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
- *
- * Successful execution of the method will have completed as YES and error object is nil
- * In case of failure the completed is set to NO and error will have NSError object with domain, 
- * code and localizedDescription.
- *
- */
-
-RCT_EXPORT_METHOD(startApplicationTransactionWithNameFoo:(NSString *) transactionName completionHandler:(RCTResponseSenderBlock) completionBlock)
-{
-    [CAMDOReporter startApplicationTransactionWithName: transactionName completionHandler: ^(BOOL completed, NSError *error) {
-      completionBlock(@[@(completed), RCTNullIfNil(error)]);
-    }];
-}
-
-/**
- * Use this API to start a transaction with a name and a service name
+ * Use this API to start a transaction with a name (and a service name)
  * Completion block can be used to verify whether the transaction is started successfully or not
  *
  * @param transactionName is a string
  * @param serviceName is a string
- * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
  *
  * Successful execution of the method will have completed as YES and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain, 
@@ -465,12 +367,12 @@ RCT_EXPORT_METHOD(startApplicationTransaction:(NSString *) transactionName  serv
   void (^completion)(BOOL completed, NSError *error) =  ^(BOOL completed, NSError *error) {
     completionBlock(@[@(completed), CAMAAErrorString(error)]);
   };
-//  if (serviceName) {
-  [CAMDOReporter startApplicationTransactionWithName: transactionName service: serviceName completionHandler:completion];
-//  }
-//  else {
-//    [CAMDOReporter startApplicationTransactionWithName: transactionName completionHandler: completion];
-//  }
+  if (serviceName) {
+    [CAMDOReporter startApplicationTransactionWithName: transactionName service: serviceName completionHandler:completion];
+  }
+  else {
+    [CAMDOReporter startApplicationTransactionWithName: transactionName completionHandler: completion];
+  }
 }
 
 /**
@@ -478,7 +380,7 @@ RCT_EXPORT_METHOD(startApplicationTransaction:(NSString *) transactionName  serv
  * Completion block can be used to verify whether transaction is stopped successfully or not
  *
  * @param transactionName is a string
- * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
  *
  * Successful execution of the method will have completed as YES and and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain,
@@ -488,7 +390,7 @@ RCT_EXPORT_METHOD(startApplicationTransaction:(NSString *) transactionName  serv
 RCT_EXPORT_METHOD(stopApplicationTransactionWithName:(NSString *) transactionName completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
     [CAMDOReporter stopApplicationTransactionWithName: transactionName completionHandler:^(BOOL completed, NSError *error) {
-      completionBlock(@[@(completed), RCTNullIfNil(error)]);
+      completionBlock(@[@(completed), CAMAAErrorString(error)]);
     }];
 }
 /**
@@ -497,17 +399,17 @@ RCT_EXPORT_METHOD(stopApplicationTransactionWithName:(NSString *) transactionNam
  *
  * @param transactionName is a string
  * @param failure is string.
- * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
  *
  * Successful execution of the method will have completed as YES and and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
  *
  */
-RCT_EXPORT_METHOD(stopApplicationTransactionWithName:(NSString *) transactionName failure:(NSString *) failure completionHandler:(RCTResponseSenderBlock) completionBlock)
+RCT_EXPORT_METHOD(stopApplicationTransactionWithFailure:(NSString *) transactionName failure:(NSString *) failure completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
     [CAMDOReporter stopApplicationTransactionWithName: transactionName failure:failure completionHandler:^(BOOL completed, NSError *error) {
-      completionBlock(@[@(completed), RCTNullIfNil(error)]);
+      completionBlock(@[@(completed), CAMAAErrorString(error)]);
     }];
 }
 
@@ -547,7 +449,7 @@ RCT_EXPORT_METHOD(setCustomerLocation:(NSString *) postalCode andCountry:(NSStri
  *
  * @param name for the screen name, cannot be nil.
  * @param quality of the image. The value should be between 0.0 and 1.0. The default is low quality.
- * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
  *
  * Successful execution of the method will have completed as YES and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain, 
@@ -557,10 +459,9 @@ RCT_EXPORT_METHOD(setCustomerLocation:(NSString *) postalCode andCountry:(NSStri
 RCT_EXPORT_METHOD(sendScreenShot:(NSString *) name withQuality:(CGFloat) quality completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
     [CAMDOReporter sendScreenShot: name withQuality: quality completionHandler: ^(BOOL completed, NSError *error) {
-      completionBlock(@[@(completed), RCTNullIfNil(error)]);
+      completionBlock(@[@(completed), CAMAAErrorString(error)]);
     }];
 }
-
 
 /**
  * Use this API to programmatically enable or disable capturing screenshots.
@@ -579,26 +480,8 @@ RCT_EXPORT_METHOD(enableScreenShots:(BOOL) captureScreen)
  *
  * @param viewName is the name of the view loaded
  * @param loadTime is the time it took to load the view
- * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
- *
- * Successful execution of the method will have completed as YES and error object is nil 
- * In case of failure the completed is set to NO and error will have NSError object with domain,
- * code and localizedDescription.
- */
-RCT_EXPORT_METHOD(viewLoaded:(NSString *) viewName loadTime:(CGFloat) loadTime completionHandler:(RCTResponseSenderBlock) completionBlock)
-{
-    [CAMDOReporter viewLoaded: viewName loadTime: loadTime completionHandler: ^(BOOL completed, NSError *error) {
-      completionBlock(@[@(completed), RCTNullIfNil(error)]);
-    }];
-}
-
-/**
- * Use this API to create a custom app flow with dynamic views
- *
- * @param viewName is the name of the view loaded
- * @param loadTime is the time it took to load the view
  * @param captureScreen is a boolean value to enable/disable screen captures.
- * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
  *
  * Successful execution of the method will have completed as YES and error object is nil 
  * In case of failure the completed is set to NO and error will have NSError object with domain,
@@ -606,15 +489,22 @@ RCT_EXPORT_METHOD(viewLoaded:(NSString *) viewName loadTime:(CGFloat) loadTime c
  */
 RCT_EXPORT_METHOD(viewLoaded:(NSString *) viewName loadTime:(CGFloat) loadTime screenShot:(BOOL) screenCapture completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
-    [CAMDOReporter viewLoaded: viewName loadTime: loadTime screenShot: screenCapture completionHandler: ^(BOOL completed, NSError *error) {
-      completionBlock(@[@(completed), RCTNullIfNil(error)]);
-    }];
+  void (^completion)(BOOL completed, NSError *error) =  ^(BOOL completed, NSError *error) {
+    completionBlock(@[@(completed), CAMAAErrorString(error)]);
+  };
+  if (screenCapture) {
+    [CAMDOReporter viewLoaded: viewName loadTime: loadTime screenShot: screenCapture completionHandler: completion];
+  }
+  else {
+    [CAMDOReporter viewLoaded: viewName loadTime: loadTime completionHandler: completion];
+  }
 }
 
 /**
  * Use this API to set the name of a view to be ignored
  * @param viewName is Name of the view to be ignored
  * Screenshots and transitions of the views that are in ignore list are not captured
+ *
  */
 RCT_EXPORT_METHOD(ignoreView:(NSString *) viewName)
 {
@@ -641,8 +531,7 @@ RCT_EXPORT_METHOD(ignoreViews:(NSSet *) viewNames)
  */
 RCT_EXPORT_METHOD(isScreenshotPolicyEnabled:(RCTResponseSenderBlock)callback)
 {
-    BOOL isEnabled = [CAMDOReporter isScreenshotPolicyEnabled];
-    callback(@[@(isEnabled)]);
+    callback(@[@([CAMDOReporter isScreenshotPolicyEnabled])]);
 }
 
 /**
@@ -653,7 +542,7 @@ RCT_EXPORT_METHOD(isScreenshotPolicyEnabled:(RCTResponseSenderBlock)callback)
  * @param responseTime is an integer value representing the response time
  * @param inBytes is an integer value representing the number of bytes input
  * @param outBytes is an integer value representing the number of bytes output
- * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
  *
  * Successful execution of the method will have completed as YES and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain,
@@ -663,7 +552,7 @@ RCT_EXPORT_METHOD(isScreenshotPolicyEnabled:(RCTResponseSenderBlock)callback)
 RCT_EXPORT_METHOD(logNetworkEvent:(NSString *) url withStatus:(NSInteger) status withResponseTime:(int64_t) responseTime withInBytes:(int64_t) inBytes withOutBytes:(int64_t) outBytes completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
     [CAMDOReporter logNetworkEvent: url withStatus: status withResponseTime: responseTime withInBytes: inBytes withOutBytes: outBytes completionHandler: ^(BOOL completed, NSError *error) {
-      completionBlock(@[@(completed), RCTNullIfNil(error)]);
+      completionBlock(@[@(completed), CAMAAErrorString(error)]);
     }];
 }
 
@@ -673,7 +562,7 @@ RCT_EXPORT_METHOD(logNetworkEvent:(NSString *) url withStatus:(NSInteger) status
  * @param metricName is a string metric name
  * @param metricValue is a string metric value
  * @param attributes is a Dictionary which can be used to send any extra parameters
- * @param completionBlock is a standard (BOOL completed, NSError *error) completionBlock
+ * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
  *
  * Successful exceution of the method will have completed as YES and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain,
@@ -683,7 +572,7 @@ RCT_EXPORT_METHOD(logNetworkEvent:(NSString *) url withStatus:(NSInteger) status
 RCT_EXPORT_METHOD(logTextMetric:(NSString *) metricName withValue:(NSString *) metricValue withAttributes:(nullable NSDictionary *) attributes completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
     [CAMDOReporter logTextMetric: metricName withValue: metricValue withAttributes: (NSMutableDictionary *)attributes completionHandler: ^(BOOL completed, NSError *error) {
-      completionBlock(@[@(completed), RCTNullIfNil(error)]);
+      completionBlock(@[@(completed), CAMAAErrorString(error)]);
     }];
 }
 
@@ -693,7 +582,7 @@ RCT_EXPORT_METHOD(logTextMetric:(NSString *) metricName withValue:(NSString *) m
  * @param metricName is a string metric name
  * @param metricValue is a double metric value
  * @param attributes is a Dictionary which can be used to send any extra parameters
- * @param completionBlock which is a standard (BOOL completed, NSError *error) completionBlock.
+ * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
  *
  * Successful execution of the method will have completed as YES and error object is nil
  * In case of failure the completed is set to NO and error will have NSError object with domain,
@@ -703,7 +592,7 @@ RCT_EXPORT_METHOD(logTextMetric:(NSString *) metricName withValue:(NSString *) m
 RCT_EXPORT_METHOD(logNumericMetric:(NSString *) metricName withValue:(double) metricValue withAttributes:(nullable NSDictionary *) attributes completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
     [CAMDOReporter logNumericMetric: metricName withValue: metricValue withAttributes: (NSMutableDictionary *)attributes completionHandler: ^(BOOL completed, NSError *error) {
-      completionBlock(@[@(completed), RCTNullIfNil(error)]);
+      completionBlock(@[@(completed), CAMAAErrorString(error)]);
     }];
 }
 
