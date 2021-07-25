@@ -355,10 +355,10 @@ RCT_EXPORT_METHOD(stopCurrentAndStartNewSession)
  *
  * @param transactionName is a string
  * @param serviceName is a string
- * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
+ * @param completionBlock a block or function which accepts a BOOL completed, and an errorString
  *
- * Successful execution of the method will have completed as YES and error object is nil
- * In case of failure the completed is set to NO and error will have NSError object with domain, 
+ * Successful execution of the method will have completed as YES and errorString as an empty string
+ * In case of failure completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
  *
  */
@@ -380,12 +380,12 @@ RCT_EXPORT_METHOD(startApplicationTransaction:(NSString *) transactionName  serv
  * Completion block can be used to verify whether transaction is stopped successfully or not
  *
  * @param transactionName is a string
- * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
+ * @param completionBlock a block or function which accepts a BOOL completed, and an errorString
  *
- * Successful execution of the method will have completed as YES and and error object is nil
- * In case of failure the completed is set to NO and error will have NSError object with domain,
+ * Successful execution of the method will have completed as YES and errorString as an empty string
+ * In case of failure completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
- *
+*
  */
 RCT_EXPORT_METHOD(stopApplicationTransactionWithName:(NSString *) transactionName completionHandler:(RCTResponseSenderBlock) completionBlock)
 {
@@ -399,10 +399,10 @@ RCT_EXPORT_METHOD(stopApplicationTransactionWithName:(NSString *) transactionNam
  *
  * @param transactionName is a string
  * @param failure is string.
- * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
+ * @param completionBlock a block or function which accepts a BOOL completed, and an errorString
  *
- * Successful execution of the method will have completed as YES and and error object is nil
- * In case of failure the completed is set to NO and error will have NSError object with domain,
+ * Successful execution of the method will have completed as YES and errorString as an empty string
+ * In case of failure completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
  *
  */
@@ -440,6 +440,7 @@ RCT_EXPORT_METHOD(setLocation:(double) latitude and:(double) longitude)
 /**
  * Use this API to set Location of the Customer/User
  * by passing postalCode and countryCode.
+ *
  * @param postalCode is the country's postal code, e.g. zip code in US
  * @param countryCode is the two letter international code for the country
  *
@@ -453,11 +454,17 @@ RCT_EXPORT_METHOD(setCustomerLocation:(NSString *) postalCode andCountry:(NSStri
  * Use this API to send the screen shot of the current screen
  *
  * @param name for the screen name, cannot be nil.
- * @param quality of the image. The value should be between 0.0 and 1.0. The default is low quality.
- * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
+ * @param quality of the image. The value should be between 0.0 and 0.3. The default is low quality.
+ * @param completionBlock a block or function which accepts a BOOL completed, and an errorString
  *
- * Successful execution of the method will have completed as YES and error object is nil
- * In case of failure the completed is set to NO and error will have NSError object with domain, 
+ * The following values for quality are defined:
+ * - CAMAA_SCREENSHOT_QUALITY_HIGH
+ * - CAMAA_SCREENSHOT_QUALITY_MEDIUM
+ * - CAMAA_SCREENSHOT_QUALITY_LOW
+ * - CAMAA_SCREENSHOT_QUALITY_DEFAULT
+ *
+ * Successful execution of the method will have completed as YES and errorString as an empty string
+ * In case of failure completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
  *
  */
@@ -470,7 +477,9 @@ RCT_EXPORT_METHOD(sendScreenShot:(NSString *) name withQuality:(CGFloat) quality
 
 /**
  * Use this API to programmatically enable or disable capturing screenshots.
+ *
  * @param captureScreen is a boolean value to enable/disable automatic screen captures.
+ *
  * Normally the policy deterines whether automatic screen captures are performed.
  * Use this API to override the policy, or the current setting of this flag.
  *
@@ -486,10 +495,10 @@ RCT_EXPORT_METHOD(enableScreenShots:(BOOL) captureScreen)
  * @param viewName is the name of the view loaded
  * @param loadTime is the time it took to load the view
  * @param captureScreen is a boolean value to enable/disable screen captures.
- * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
+ * @param completionBlock a block or function which accepts a BOOL completed, and an errorString
  *
- * Successful execution of the method will have completed as YES and error object is nil 
- * In case of failure the completed is set to NO and error will have NSError object with domain,
+ * Successful execution of the method will have completed as YES and errorString as an empty string
+ * In case of failure completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
  */
 RCT_EXPORT_METHOD(viewLoaded:(NSString *) viewName loadTime:(CGFloat) loadTime screenShot:(BOOL) screenCapture completionHandler:(RCTResponseSenderBlock) completionBlock)
@@ -547,10 +556,10 @@ RCT_EXPORT_METHOD(isScreenshotPolicyEnabled:(RCTResponseSenderBlock)callback)
  * @param responseTime is an integer value representing the response time
  * @param inBytes is an integer value representing the number of bytes input
  * @param outBytes is an integer value representing the number of bytes output
- * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
+ * @param completionBlock a block or function which accepts a BOOL completed, and an errorString
  *
- * Successful execution of the method will have completed as YES and error object is nil
- * In case of failure the completed is set to NO and error will have NSError object with domain,
+ * Successful execution of the method will have completed as YES and errorString as an empty string
+ * In case of failure completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
  *
  */
@@ -567,10 +576,10 @@ RCT_EXPORT_METHOD(logNetworkEvent:(NSString *) url withStatus:(NSInteger) status
  * @param metricName is a string metric name
  * @param metricValue is a string metric value
  * @param attributes is a Dictionary which can be used to send any extra parameters
- * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
+ * @param completionBlock a block or function which accepts a BOOL completed, and an errorString
  *
- * Successful exceution of the method will have completed as YES and error object is nil
- * In case of failure the completed is set to NO and error will have NSError object with domain,
+ * Successful execution of the method will have completed as YES and errorString as an empty string
+ * In case of failure completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
  *
  */
@@ -587,10 +596,10 @@ RCT_EXPORT_METHOD(logTextMetric:(NSString *) metricName withValue:(NSString *) m
  * @param metricName is a string metric name
  * @param metricValue is a double metric value
  * @param attributes is a Dictionary which can be used to send any extra parameters
- * @param completionBlock a block or function which accepts (BOOL completed, NSError *error)
+ * @param completionBlock a block or function which accepts a BOOL completed, and an errorString
  *
- * Successful execution of the method will have completed as YES and error object is nil
- * In case of failure the completed is set to NO and error will have NSError object with domain,
+ * Successful execution of the method will have completed as YES and errorString as an empty string
+ * In case of failure completed is set to NO and error will have NSError object with domain,
  * code and localizedDescription.
  *
  */
