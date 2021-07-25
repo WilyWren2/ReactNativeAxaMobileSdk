@@ -425,11 +425,16 @@ RCT_EXPORT_METHOD(setCustomerFeedback:(NSString *) feedback)
     [CAMDOReporter setCustomerFeedback: feedback];
 }
 
-/* Set Location of the Customer/User by passing CLLocation (latitude & longitude).
+/**
+ * Use this API to set Geographic or GPS Location of the Customer
+ *
+ * @param latitude is the geographic latitude from -90.0 to 90.0 degrees
+ * @param logitude is the geographic longitude from -180.0 to 180.0 degrees
+ *
  */
-RCT_EXPORT_METHOD(setCustomerLocation:(CLLocation *) location)
+RCT_EXPORT_METHOD(setLocation:(double) latitude and:(double) longitude)
 {
-  [CAMDOReporter setCustomerLocation: location];
+  [CAMDOReporter setCustomerLocation:[[CLLocation alloc] initWithLatitude:latitude longitude:longitude]];
 }
 
 /**
@@ -600,18 +605,19 @@ RCT_EXPORT_METHOD(logNumericMetric:(NSString *) metricName withValue:(double) me
  * Use this API to force an upload event.
  * This is bulk/resource consuming operation and should be used with caution
  *
- * @param completionBlock with response as NSDictionary and error object
+ * @param completionBlock with response as NSDictionary and error string
  *
- * Response is a key,value paired array which contains:
- *  the Key 'CAMDOResponseKey' which holds the URLResponse details
- *  the key 'CAMDOTotalUploadedEvents' which holds the total number of events uploaded
- * error object is nil if the API call is completed, otherwise an error
+ * Returns:
+ * - Response is a key,value paired array which contains:
+ *  the Key 'CAMDOResponseKey' holds any URLResponse information
+ *  the key 'CAMDOTotalUploadedEvents' holds the total number of events uploaded
+ * - error is empty if the API call is completed, otherwise is a localized error description
  *
  */
 RCT_EXPORT_METHOD(uploadEvents:(RCTResponseSenderBlock) callback)
 {
     [CAMDOReporter uploadEventsWithCompletionHandler: ^(NSDictionary *response, NSError *error) {
-      callback(@[RCTNullIfNil(response), RCTNullIfNil(error)]);
+      callback(@[RCTNullIfNil(response), CAMAAErrorString(error)]);
     }];
 }
 @end

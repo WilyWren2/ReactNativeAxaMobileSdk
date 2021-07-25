@@ -551,10 +551,9 @@ AXASDK.startApplicationTransaction(transactionName, serviceName (completed, erro
 </details>
 
 
-### stopApplicationTransactionWithName( transactionName, completionBlock )
-Use this API to stop a transaction with a specific name.
+### stopApplicationTransaction( transactionName, completionBlock )
 <details>
-<summary>more...</summary>
+<summary>Use this API to stop a transaction with a specific name.</summary>
 
 Parameters:
 - transactionName is a string
@@ -582,9 +581,8 @@ AXASDK.stopApplicationTransactionWithName(transactionName, (completed, errorStri
 
 
 ### setCustomerFeedback( feedback )
-Use this API to provide feedback from the user after a crash.
 <details>
-<summary>more...</summary>
+<summary>Use this API to provide feedback from the user after a crash.</summary>
 
 Parameters:
 -  feedback is a string containing any customer feedback for the crash.
@@ -597,10 +595,26 @@ AXASDK.setCustomerFeedback(feedback);
 </details>
 
 
-### setCustomerLocation( postalCode, countryCode )
-Use this API to set Location of the Customer/User.
+### setLocation( latitude, longitude )
 <details>
-<summary>more...</summary>
+<summary>Use this API to set Geographic or GPS Location of the Customer.</summary>
+
+Parameters:
+- latitude is a double with the geographic latitude from -90,0 to 90.0 degrees.
+- longitude is a double with the geographic longitude from -180.0 to 180.0 degrees.
+
+```
+var latitude = 34.678;
+var longitude = -122.456;
+AXASDK.setLocation(latitude, longitude);
+
+```
+</details>
+
+
+### setCustomerLocation( postalCode, countryCode )
+<details>
+<summary>Use this API to set Location of the Customer/User.</summary>
 
 Parameters:
 - postalCode is a string with the postal code, e.g. zip code in US.
@@ -615,58 +629,9 @@ AXASDK.setCustomerLocation(postalCode, countryCode);
 </details>
 
 
-### setLocation( latitude, longitude )
-Use this API to set Geographic or GPS Location of the Customer.
-<details>
-<summary>more...</summary>
-
-Parameters:
-- latitude is a double with the geographic latitude.
-- longitude is a double with the geographic longitude.
-
-```
-var latitude = 34.678;
-var longitude = -122.456;
-AXASDK.setLocation(latitude, longitude);
-
-```
-</details>
-
-
-### sendScreenShot( screenName, imageQuality, completionBlock )
-Use this API to stop a transaction with a specific name.
-<details>
-<summary>more...</summary>
-
-Parameters:
-- screenName is a non-empty string for the screen name
-- imageQuality is number indicating the quality of the image between 0.0 and 1.0, default is low-quality
-- completionBlock is a function expecting a BOOL completed, and an errorString
-
-Successful execution of the method will have completed as YES and errorString as an empty string.
-In case of failure the completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
-
-```
-AXASDK.sendScreenShot(screenName, imageQuality, (completed, errorString) => {
-    if (completed) {
-        // everything is fine
-        console.log(`***screen shot sent (${completed}) ${errorString}`);
-    } else {
-        if (errorString) {
-            // process error message
-            console.log(`error sending screen shot: ${errorString}`)
-        }
-    }
-})
-
-```
-</details>
-
-
 ### enableScreenShots( captureScreen )
-Use this API to programmatically enable or disable capturing screenshots.
 <details>
-<summary>more...</summary>
+<summary>Use this API to programmatically enable or disable capturing screenshots.</summary>
 
 Parameters:
 -  captureScreen is a boolean value to enable/disable automatic screen captures.
@@ -684,9 +649,8 @@ AXASDK.enableScreenShots(false);
 
 
 ### viewLoaded( viewName, loadTime, screenCapture, completionBlock )
-Use this API to create a custom app flow with dynamic views.
 <details>
-<summary>more...</summary>
+<summary>Use this API to create a custom app flow with dynamic views.</summary>
 
 Parameters:
 - viewName is the name of the view loaded
@@ -715,9 +679,8 @@ AXASDK.viewLoaded(viewName, loadTime, captureScreen, (completed, errorString) =>
 
 
 ### ignoreView( viewName )
-Use this API to set the name of a view to be ignored
 <details>
-<summary>more...</summary>
+<summary>Use this API to set the name of a view to be ignored</summary>
 
 Parameters:
 -  viewName is Name of the view to be ignored.
@@ -732,9 +695,8 @@ AXASDK.ignoreView(viewName);
 
 
 ### ignoreViews( viewNames )
-Use this API to provide a list of view names to be ignored.
 <details>
-<summary>more...</summary>
+<summary>Use this API to provide a list of view names to be ignored.</summary>
 
 Parameters:
 -  viewNames is a list (an Array) of names of the views to be ignored.
@@ -749,9 +711,8 @@ AXASDK.ignoreViews(viewNames);
 
 
 ### isScreenshotPolicyEnabled( callback )
-Use this API to determine of automatic screenshots are enabled by policy.
 <details>
-<summary>more...</summary>
+<summary>Use this API to determine of automatic screenshots are enabled by policy.</summary>
 
 Parameters:
 -  callback is a function which expects a boolean value
@@ -773,9 +734,8 @@ AXASDK.isScreenshotPolicyEnabled((isEnabled) => {
 
 
 ### logNetworkEvent( url, status, responseTime, inBytes, outBytes, completionBlock )
-Use this API to add a custom network event in the current session.
 <details>
-<summary>more...</summary>
+<summary>Use this API to add a custom network event in the current session.</summary>
 
 Parameters:
 - url is a string reprentation of the network URL
@@ -806,9 +766,8 @@ AXASDK.logNetworkEvent( url, status, responseTime, inBytes, outBytes, (completed
 
 
 ### logTextMetric( metricName, metricValue, attributes, completionBlock )
-Use this API to add a custom text event in the current session.
 <details>
-<summary>more...</summary>
+<summary>Use this API to add a custom text event in the current session.</summary>
 
 Parameters:
 - metricName is a string metric name
@@ -840,7 +799,8 @@ AXASDK.logTextMetric( metricName, metricValue, attributes, (completed, errorStri
 
 
 ### logNumericMetric( metricName, metricValue, attributes, completionBlock )
-Use this API to add a custom network event in the current session.
+<details>
+<summary>Use this API to add a custom network event in the current session.</summary>
 
 Parameters:
 - metricName is a string metric name
@@ -850,8 +810,6 @@ Parameters:
 
 Successful execution of the method will have completed as YES and errorString as an empty string.
 In case of failure the completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
-<details>
-<summary>more...</summary>
 
 ```
 var metricName = "ImageWidth";
@@ -873,23 +831,53 @@ AXASDK.logTextMetric( metricName, metricValue, attributes, (completed, errorStri
 </details>
 
 
+### sendScreenShot( screenName, imageQuality, completionBlock )
+<details>
+<summary>Use this API to stop a transaction with a specific name.</summary>
+
+Parameters:
+- screenName is a non-empty string for the screen name
+- imageQuality is number indicating the quality of the image between 0.0 and 1.0, default is low-quality
+- completionBlock is a function expecting a BOOL completed, and an errorString
+
+Successful execution of the method will have completed as YES and errorString as an empty string.
+In case of failure the completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
+
+```
+var screenName = "My custom Screen";
+var imageQuality = CAMAA_SCREENSHOT_QUALITY_MEDIUM;
+AXASDK.sendScreenShot(screenName, imageQuality, (completed, errorString) => {
+    if (completed) {
+        // everything is fine
+        console.log(`***screen shot sent (${completed}) ${errorString}`);
+    } else {
+        if (errorString) {
+            // process error message
+            console.log(`error sending screen shot: ${errorString}`)
+        }
+    }
+})
+
+```
+</details>
+
+
 ### uploadEvents( callback )
 <details>
 <summary>Use this API to force an upload event.</summary>
-Use this API to force an upload event.
 
+An upload event sends all information collected since any previous upload event to the APM servers.
 Parameters:
 - transactionName is a string
 -  callback is a function which expects a response object and an ErrorString.
 
 Response is a key,value paired object which contains:
-- the Key 'CAMDOResponseKey' which holds the URLResponse details
-- the key 'CAMDOTotalUploadedEvents' which holds the total number of events uploaded
+- the Key 'CAMDOResponseKey'  holds any URLResponse information
+- the key 'CAMDOTotalUploadedEvents'  holds the total number of events uploaded
 
-ErrorString is null if the API call is completed, otherwise an error
+ErrorString is empty if the API call is completed, otherwise is a localized error description
 ```
 AXASDK.uploadEvents((response, errorString) => {
-    console.log(` {${response}} ${errorString}`);
     if (errorString) {
         // process error message
         console.log(`error: ${errorString}`)
