@@ -1,7 +1,7 @@
 # ReactNativeAxaMobileSdk
-**React Native Axa Mobile Sdk** is a modern, well-supported, and cross-platform sdk for App Experience Analytics that provides deep insights into the performance, user experience, crash, and log analytics of apps.
+**React Native Axa Mobile Sdk** is a modern, well-supported, and cross-platform SDK for App Experience Analytics. This SDK provides deep insights into the performance, user experience, crash, and log analytics of your applications.
 
-CA App Experience Analytic native SDK's react native supplement for using custom metrics
+CA App Experience Analytic native SDK's react native supplement for using custom metrics.
 
 ## Platforms Supported
 
@@ -11,8 +11,7 @@ CA App Experience Analytic native SDK's react native supplement for using custom
 ## Getting started
 [DX App Experience Analytics](https://www.broadcom.com/info/aiops/app-analytics)
 
-Check out our [documentation](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-enterprise-software/it-operations-management/app-experience-analytics-saas/SaaS/reference/data-collected-by-ca-app-experience-analytics-sdk.html) for more information about the features that the App Experience Analytics SDK collects from your app.
-
+Check out our [DX App Experience Analytics documentation](https://techdocs.broadcom.com/content/broadcom/techdocs/us/en/ca-enterprise-software/it-operations-management/app-experience-analytics-saas/SaaS/reference/data-collected-by-ca-app-experience-analytics-sdk.html). You'll find more information about what the App Experience Analytics SDK collects from your app.
 
 ## Requirements
 - [x] iOS
@@ -22,35 +21,35 @@ Check out our [documentation](https://techdocs.broadcom.com/content/broadcom/tec
 
 ## Installation
 
-Follow these steps to integrate the `react native axa mobile sdk` in your project
+Follow these steps to integrate the `react native axa mobile sdk` into your project.
 
 ### Automatic installation
-1. Run the following command from your React Native project directory
+1. Run **one** of these commands from your React Native project directory:
 
     `$ yarn add react-native-axa-mobile-sdk`
     
     or
     
     `$ npm install react-native-axa-mobile-sdk --save`
-2. Run the following command for automatic linking
+2. Run this command command for automatic linking:
 
     `$ react-native link react-native-axa-mobile-sdk`
 3. iOS Setup 
     * Podfile update
     
-    If you're already using Cocoapods, goto `ios` folder from your project and specify the below pod on a single line inside your target block in a Podfile
+    If you're already using Cocoapods, go to the `ios` folder from your project and specify the pod below on a single line inside your target block in a Podfile:
        
 ```
        pod 'react-native-axa-mobile-sdk', path: '../node_modules/react-native-axa-mobile-sdk'
 ```
         
-    Then, run the following command using the command prompt from the `ios` folder of your project
+    Then, run this command using the command prompt from the `ios` folder of your project:
 
 ```
         pod install
 ```
     
-    * Drag & Drop the downloaded `xxx_camdo.plist` file into the Supporting files
+    * Drag & Drop the downloaded `xxx_camdo.plist` file into the Supporting files.
 
 
 ### Manual installation
@@ -59,41 +58,41 @@ Follow these steps to integrate the `react native axa mobile sdk` in your projec
 <details>
 <summary>iOS</summary>
 
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-axa-mobile-sdk` and add `ReactNativeAxaMobileSdk.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libReactNativeAxaMobileSdk.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
+1. In XCode, in the project navigator, right-click `Libraries` ➜ `Add Files to [your project's name]`.
+2. Go to `node_modules` ➜ `react-native-axa-mobile-sdk` and add `ReactNativeAxaMobileSdk.xcodeproj`.
+3. In XCode, in the project navigator, select your project. 
+4. Add `libReactNativeAxaMobileSdk.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`.
+5. Run your project (`Cmd+R`)<
+6. Update the Podfile.
 
-5. Podfile update
-
-    If you're already using Cocoapods, goto `ios` folder from your project and specify the below pod on a single line inside your target block in a Podfile
+    If you're already using Cocoapods, goto `ios` folder from your project. Specify the pod below on a single line inside your target block in a Podfile:
    
 ```
    pod 'react-native-axa-mobile-sdk', path: '../node_modules/react-native-axa-mobile-sdk'
 ```
 
-Then, run the following command using the command prompt from the `ios` folder of your project
+Then, run this command using the command prompt from the `ios` folder of your project:
 
 ```
     pod install
 ```
 
-6. Drag & Drop the downloaded `xxx_camdo.plist` file into the Supporting files
+7. Drag & drop the downloaded `xxx_camdo.plist` file into the Supporting files.
 </details>
 
 
 <details>
 <summary>Android</summary>
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.ReactNativeAxaMobileSdkPackage;` to the imports at the top of the file
-  - Add `new ReactNativeAxaMobileSdkPackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
+1. Open up `android/app/src/main/java/[...]/MainActivity.java`.
+  - Add `import com.reactlibrary.ReactNativeAxaMobileSdkPackage;` to the imports at the top of the file.
+  - Add `new ReactNativeAxaMobileSdkPackage()` to the list returned by the `getPackages()` method.
+2. Append this lines to `android/settings.gradle`:
 ```
       include ':react-native-axa-mobile-sdk'
       project(':react-native-axa-mobile-sdk').projectDir = new File(rootProject.projectDir,     '../node_modules/react-native-axa-mobile-sdk/android')
 ```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+3. Insert this line inside the dependencies block in `android/app/build.gradle`:
 ```
       compile project(':react-native-test-sdk')
 ```
@@ -106,9 +105,9 @@ Then, run the following command using the command prompt from the `ios` folder o
 
 ### Objective C
 
-1. Add the import header `#import "CAMDOReporter.h"` to your AppDelegate.m file
+1. Add the import header `#import "CAMDOReporter.h"` to your AppDelegate.m file.
 
-2. Initialize the CAMobileAppAnalytics sdk in `didFinishLaunchingWithOptions:` method 
+2. Initialize the CAMobileAppAnalytics SDK in the `didFinishLaunchingWithOptions:` method.
 
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -122,10 +121,10 @@ Then, run the following command using the command prompt from the `ios` folder o
 ### Swift
 1. Add a header file with the file name format as `<app_name>-Bridging-header.h`.
 2. Add the import header `#import "CAMDOReporter.h"` to your `<app_name>-Bridging-header.h` file. 
-3. Add the `<app_name>-Bridging-header.h` file to Swift Compiler - Code Generation section
+3. Add the `<app_name>-Bridging-header.h` file to the Swift Compiler - Code Generation section
 in the Build Settings.
 `<name of the project>/<app_name>-Bridging-header.h`
-4. Initialize the CAMobileAppAnalytics sdk in `didFinishLaunchingWithOptions` method 
+4. Initialize the CAMobileAppAnalytics sdk in the `didFinishLaunchingWithOptions` method.
 ``` 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     //Initialize CA App Experience Analytics SDK
@@ -135,15 +134,15 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     return true
 }
 ```
-5. Save and re-build your project
+5. Save and re-build your project.
 
 </details>
 
 ## Updation
 
-Follow these steps to updgrade the `react native axa mobile sdk` in your project
+Follow these steps to updgrade the `react native axa mobile sdk` in your project.
 
-1. Run the following command from your React Native project directory
+1. Run **one** of these command from your React Native project directory:
 
     `$ yarn upgrade react-native-axa-mobile-sdk`
     
@@ -151,32 +150,31 @@ Follow these steps to updgrade the `react native axa mobile sdk` in your project
     
     `$ npm update react-native-axa-mobile-sdk --save`
 
-2. Run `$ pod update` command from the `ios` folder.
+2. Run the `$ pod update` command from the `ios` folder.
 
 
 ## Usage
 ```javascript
 import ReactNativeAxaMobileSdk from 'react-native-axa-mobile-sdk';
 
-// TODO: What to do with the module?
+**CARL**// TODO: What to do with the module?
 ReactNativeAxaMobileSdk;
 
-???
+**CARL** ???
 const AXASDK = NativeModules.ReactNativeAxaMobileSdk;
 
-TODO: Find the proper method to assign a variable to use ReactNativeAxaMobileSdk from the package.
+**CARL** TODO: Find the proper method to assign a variable to use ReactNativeAxaMobileSdk from the package.
 In my testing, the above line still works but seems awkward.
 ```
   
-  
 ## APIs
-Individual APIs interact with the SDK to perform specific tasks and reading or setting information.  All APIs are asynchronous, and returning information is achieved using a callback or completion block.  The specifics can be found in the React Native documentation for [Android](https://reactnative.dev/docs/native-modules-android#callbacks) or [iOS](https://reactnative.dev/docs/native-modules-ios#callbacks) callbacks.
+Individual APIs interact with the SDK to perform specific tasks and reading or setting information. All APIs are asynchronous, and returning information is achieved using a callback or completion block. You can find specifics in the React Native documentation for [Android](https://reactnative.dev/docs/native-modules-android#callbacks) or [iOS](https://reactnative.dev/docs/native-modules-ios#callbacks) callbacks.
 
-A callback returns one or more value.
+A callback returns one value or more.
 
-A completionBlock always returns 2 values: completed: a boolean and errorString: an string value).
+A completionBlock always returns 2 values: completed: a Boolean and errorString: an string value).
 
-Once you have assigned a variable or constant to the ReactNativeAxaMobileSdk module as shown in "Usage", calling individual APIs is as simple as:
+Once you have assigned a variable or constant to the ReactNativeAxaMobileSdk module as shown in "Usage", use these commands to call individual APIs:
 
 ```
 AXASDK.individualAPI();
@@ -188,11 +186,10 @@ AXASDK.individualAPI(argument1, argument2, ..., completionBlock);
 
 Follow the examples in the API descriptions below for how to use the callback or completion blocks.
 
-
 ### disableSDK()
 <details><summary>Use this API to disable the SDK.</summary>
 
-When disabled, the SDK no longer does any tracking of the application, or user interaction.
+When the SDK is disabled, the SDK no longer tracks application or user interactions.
 
 ```
 AXASDK.disableSDK();
@@ -204,7 +201,7 @@ AXASDK.disableSDK();
 ### enableSDK()
 <details><summary>Use this API to enable the SDK.</summary>
 
-The SDK is enabled by default.  You need to call this API only if you called disableSDK earlier.
+The SDK is enabled by default. You need to call this API only if you called disableSDK earlier.
 
 ```
 AXASDK.enableSDK();
@@ -212,12 +209,11 @@ AXASDK.enableSDK();
 ```
 </details>
 
-
 ### isSDKEnabled( callback )
-<details><summary>Use this API to determine if the SDK is enabled or not.</summary>
+<details><summary>Use this API to determine whether the SDK is enabled or not.</summary>
 
 Parameters:
--  callback is a function which expects a boolean value
+-  callback is a function that expects a Boolean value.
 
 ```
 AXASDK.isSDKEnabled((isEnabled) => {
@@ -237,7 +233,7 @@ AXASDK.isSDKEnabled((isEnabled) => {
 <details><summary>Use this API to get the unique device ID generated by the SDK.</summary>
 
 Parameters:
--  callback is a function which expects a string value.
+-  callback is a function that expects a string value.
 
 ```
 AXASDK.getDeviceId((deviceId) => {
@@ -254,9 +250,9 @@ AXASDK.getDeviceId((deviceId) => {
 <details><summary>Use this API to get the customer ID for this session.</summary>
 
 Parameters:
--  callback is a function which expects a string value
+-  callback is a function that expects a string value.
 
-If the customer Id is not set, this API returns an empty string.
+When the customer ID is not set, this API returns an empty string.
 
 ```
 AXASDK.getCustomerId((customerId) => {
@@ -273,10 +269,10 @@ AXASDK.getCustomerId((customerId) => {
 <details><summary>Use this API to set the customer ID for this session.</summary>
 
 Parameters:
-- customerID is a string containing the customer Id
-- callback is a function which expects an (SDKError value)
+- customerID is a string containing the customer ID.
+- callback is a function that expects an (SDKError value).
 
-If an empty string is passed, the customer id is reset. An SDKError value is returned.
+When an empty string is passed, the customer ID is reset. An SDKError value is returned.
 
 ```
 var customerId = "New Customer"
@@ -311,11 +307,11 @@ AXASDK.setCustomerId(customerId, (SDKError) => {
 <details><summary>Use this API to set a custom session attribute.</summary>
 
 Parameters:
--  name is a string containing the name of the attribute
-- value is a string containing the value for the attribute
-- callback is a function which expects an (SDKError value)
+- name is a string containing the name of the attribute.
+- value is a string containing the value for the attribute.
+- callback is a function that expects an (SDKError value).
 
-If an empty string is passed, the customer id is reset. An SDKError value is returned.
+When an empty string is passed, the customer ID is reset. An SDKError value is returned.
 
 ```
 var attributeName = "ClientDemo";
@@ -350,10 +346,10 @@ AXASDK.setSessionAttribute(attributeName, attributeValue, (SDKError) => {
 ### enterPrivateZone()
 <details><summary>Use this API to stop collecting potentially sensitive data.</summary>
 
-The following data is not collected when the app enters a private zone:
+This data is not collected when the app enters a private zone:
 - Screenshots
-- Location information including GPS and IP addresses
-- Values in any text entry fields
+- Location information, including GPS and IP addresses.
+- Values in any text-entry fields.
 
 The SDK is enabled by default.  You need to call this API only if you called disableSDK earlier.
 
@@ -377,10 +373,10 @@ AXASDK.exitPrivateZone();
 
 ### isInPrivateZone( callback )
 <details>
-<summary>Use this API to determine if the SDK is in a private zone.</summary>
+<summary>Use this API to determine whether the SDK is in a private zone.</summary>
 
 Parameters:
-- callback is a function which expects a boolean value
+- callback is a function that expects a Boolean value.
 
 ```
 AXASDK.isInPrivateZone((inPrivateZone) => {
@@ -398,11 +394,11 @@ AXASDK.isInPrivateZone((inPrivateZone) => {
 
 ### getAPMHeader( callback )
 <details>
-<summary>Use this API to get the SDK computed APM header in key value format.</summary>
+<summary>Use this API to get the SDK-computed DX APM header in key-value format.</summary>
 
 Parameters:
--  callback is a function which expects an (array of alternating key, value pairs)
--  callback is a function which expects a dictionary or map of key, value pairs
+-  callback is a function that expects an array of alternating key/value pairs.
+-  callback is a function that expects a dictionary or map of key/value pairs.
 
 
 ```
@@ -419,12 +415,12 @@ AXASDK.getAPMHeader((headers) => {
 
 ### addToAPMHeader( data )
 <details>
-<summary>Use this API to add custom data to the SDK computed APM header.</summary>
+<summary>Use this API to add custom data to the SDK-computed DX APM header.</summary>
 
 Parameters:
 -  data is a non-empty string in the form of "key=value".
 
-data will be appended to the header separated by a semicolon (;).
+-  data is appended to the header separated by a semicolon (;).
 
 ```
 var newAPMData = "PrivateKey=PrivateInfo";
@@ -437,12 +433,12 @@ AXASDK.addToAPMHeader(newAPMData);
 
 ### setNSURLSessionDelegate( delegate )
 <details>
-<summary>Use this API to set your delegate instance to handle auth challenges.</summary>
+<summary>Use this API to set your delegate instance to handle authorization challenges.</summary>
 
-Use it when using SDKUseNetworkProtocolSwizzling option during SDK initialization.
+Use this API when using the SDKUseNetworkProtocolSwizzling option during SDK initialization.
 
 Parameters:
--  delegate an object or module which responds to NSURLSessionDelegate protocols.
+-  delegate an object or module that responds to NSURLSessionDelegate protocols.
 
 ```
 AXASDK.setNSURLSessionDelegate(delegate);
@@ -453,11 +449,11 @@ AXASDK.setNSURLSessionDelegate(delegate);
 
 ### setSSLPinningMode( pinningMode, pinnedValues )
 <details>
-<summary>Use this API to set the ssl pinning mode and array of pinned values.</summary>
+<summary>Use this API to set the SSL-pinning mode and array of pinned values.</summary>
 
 Parameters:
-- pinningMode is one of the CAMDOSSLPinning modes described below
-- pinnedValues is an array as required by the pinning mode
+- pinningMode is one of the CAMDOSSLPinning modes described below.
+- pinnedValues is an array that is required by the pinning mode.
 
 ```
 var pinningMode = CAMDOSSLPinningModeFingerPrintSHA1Signature;
@@ -483,7 +479,7 @@ Supported pinning modes:
 <details>
 <summary>Use this API to stop the current session.</summary>
 
-No data will be logged until the startSession API is called.
+No data is logged until the SDK calls the startSession API.
 
 ```
 AXASDK.stopCurrentSession();
@@ -496,7 +492,7 @@ AXASDK.stopCurrentSession();
 <details>
 <summary>Use this API to start a new session.</summary>
 
-If a session is already in progress, it will be stopped and new session is started.
+A session already in progress is stopped, and new session is started.
 
 ```
 AXASDK.startNewSession();
@@ -507,9 +503,9 @@ AXASDK.startNewSession();
 
 ### stopCurrentAndStartNewSession()
 <details>
-<summary>Convenience API to stop the current session in progress and start a new session.</summary>
+<summary>Convenience API to stop the current session while in-progress, and start a new session.</summary>
 
-Equivalent to calling stopCurrentSession() followed by startNewSession()
+This API is equivalent to calling stopCurrentSession() followed by startNewSession()
 
 ```
 AXASDK.stopCurrentAndStartNewSession();
@@ -523,12 +519,12 @@ AXASDK.stopCurrentAndStartNewSession();
 <summary>Use this API to start a transaction with a name.</summary>
 
 Parameters:
-- transactionName is a string to indicate the transaction being processed
-- serviceName is a string to indicate the service or application being applied
-- completionBlock is a function expecting a BOOL completed, and an errorString
+- transactionName is a string indicating the transaction being processed.
+- serviceName is a string indicating the service or application being applied.
+- completionBlock is a function expecting a BOOL completed and an errorString.
 
-Successful execution of the method will have completed as YES and errorString as an empty string.
-In case of failure completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
+Successful execution of the method completes as YES. The errorString is an empty string.
+In case of failure, execution of the method completes as NO. The errorString contains a message that includes a domain, code, and localizedDescription.
 
 ```
 var transactionName = "subscription";
@@ -552,14 +548,14 @@ AXASDK.startApplicationTransaction(transactionName, serviceName (completed, erro
 
 ### stopApplicationTransaction( transactionName, completionBlock )
 <details>
-<summary>Use this API to stop a transaction with a specific name.</summary>
+<summary>Use this API to stop a transaction that has a specific name.</summary>
 
 Parameters:
-- transactionName is a string
-- completionBlock is a function expecting a BOOL completed, and an errorString
+- transactionName is a string.
+- completionBlock is a function expecting a BOOL completed and an errorString.
 
-Successful execution of the method will have completed as YES and errorString as an empty string.
-In case of failure completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
+Successful execution of the method completes as YES. The errorString is an empty string.
+case of failure, execution of the method completes as NO. The errorString contains a message that includes a domain, code, and localizedDescription.
 
 ```
 var transactionName = "subscription";
@@ -579,19 +575,17 @@ AXASDK.stopApplicationTransactionWithName(transactionName, (completed, errorStri
 ```
 </details>
 
-
-
 ### stopApplicationTransactionWithFailure( transactionName, failureString, completionBlock )
 <details>
-<summary>Use this API to stop a transaction with a specific name.</summary>
+<summary>Use this API to stop a transaction that has a specific name.</summary>
 
 Parameters:
-- transactionName is a string to indicate the transaction being processed
-- failureString is a string to indicate the name, message or type of failure
-- completionBlock is a function expecting a BOOL completed, and an errorString
+- transactionName is a string to indicate the transaction being processed.
+- failureString is a string to indicate the name, message or type of failure.
+- completionBlock is a function expecting a BOOL completed, and an errorString.
 
-Successful execution of the method will have completed as YES and errorString as an empty string.
-In case of failure completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
+Successful execution of the method completes as YES. The errorString is an empty string.
+case of failure, execution of the method completes as NO. The errorString contains a message that includes a domain, code, and localizedDescription.
 
 ```
 var transactionName = "subscription";
@@ -631,7 +625,7 @@ AXASDK.setCustomerFeedback(feedback);
 
 ### setLocation( latitude, longitude )
 <details>
-<summary>Use this API to set Geographic or GPS Location of the Customer.</summary>
+<summary>Use this API to set the customer geographic or GPS location.</summary>
 
 Parameters:
 - latitude is a double with the geographic latitude from -90,0 to 90.0 degrees.
@@ -648,11 +642,11 @@ AXASDK.setLocation(latitude, longitude);
 
 ### setCustomerLocation( postalCode, countryCode )
 <details>
-<summary>Use this API to set Location of the Customer/User.</summary>
+<summary>Use this API to set customer/user location.</summary>
 
 Parameters:
-- postalCode is a string with the postal code, e.g. zip code in US.
-- countryCode is a string with the two letter international code for the country
+- postalCode is a string with the postal code. For example, a zip code in the United States.
+- countryCode is a string with the two letter international country code.
 
 ```
 var postalCode = "95200";
@@ -665,12 +659,12 @@ AXASDK.setCustomerLocation(postalCode, countryCode);
 
 ### enableScreenShots( captureScreen )
 <details>
-<summary>Use this API to programmatically enable or disable automatic capturing of screenshots.</summary>
+<summary>Use this API to programmatically enable or disable automatic screenshot capturing.</summary>
 
 Parameters:
--  captureScreen is a boolean value to enable/disable automatic screen captures.
+-  captureScreen is a Boolean value to enable/disable automatic screen captures.
 
-Normally the policy deterines whether automatic screen captures are performed.
+Normally the policy determines whether automatic screen captures are performed.
 Use this API to override the policy, or the current setting of this flag.
 
 ```
@@ -687,16 +681,16 @@ AXASDK.enableScreenShots(false);
 <summary>Use this API to create a custom app flow with dynamic views.</summary>
 
 Parameters:
-- viewName is the name of the view loaded
-- loadTime is the time it took to load the view
-- captureScreen is a boolean value, if false screen capture is disabled for the current invocation of the API call
-- completionBlock is a function expecting a BOOL completed, and an errorString
+- viewName is the name of the loaded view.
+- loadTime is the time it took the API to load the view.
+- captureScreen is a Boolean value. When false, screen capture is disabled for the current invocation of the API call.
+- completionBlock is a function that expects a BOOL completed and an errorString.
 
-The value captureScreen, can allow (if true) or disable (if false) the screen capture for this current call.
-It may not be used to enable screen capture if screen capture is not already enabled by current policy.
+The value captureScreen, can allow (when true) or disable (when false), screen capture for the current call.
+The value may not be used to enable screen capture when screen capture is not already enabled by current policy.
 
-Successful execution of the method will have completed as YES and errorString as an empty string.
-In case of failure completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
+Successful execution of the method completes as YES. The errorString is an empty string.
+case of failure, execution of the method completes as NO. The errorString contains a message that includes a domain, code, and localizedDescription.
 
 ```
 var viewName = "my custom view";"
@@ -721,13 +715,13 @@ AXASDK.viewLoaded(viewName, loadTime, captureScreen, (completed, errorString) =>
 
 ### ignoreView( viewName )
 <details>
-<summary>Use this API to set the name of a view to be ignored</summary>
+<summary>Use this API to set the name of a view to be ignored.</summary>
 
 Parameters:
--  viewName is Name of the view to be ignored.
+-  viewName is the name of the view to be ignored.
 
 Screenshots and transitions of the views that are in ignore list are not captured.
-If more than one view is to be ignored, ignoreViews() may be called with a list.
+If more than one view is to be ignored, you can call ignoreViews() with a list.
 
 ```
 var viewName = "view1";
@@ -743,10 +737,10 @@ AXASDK.ignoreView(viewName);
 <summary>Use this API to provide a list of view names to be ignored.</summary>
 
 Parameters:
--  viewNames is a list (an Array) of names of the views to be ignored.
+-  viewNames is a list (an array) of the view names of the  to be ignored.
 
-Screenshots and transitions of the views that are in ignore list are not captured.
-If only a signle view name is to be ignored, ignoreView() may be called with the view name.
+The API does not capture screenshots and transitions of the views that are in the ignore list.
+If only a single view name to be ignored, you can call ignoreView() with the view name.
 
 ```
 var viewNames = ["view1", "view2", ..., "viewN"];
@@ -759,12 +753,12 @@ AXASDK.ignoreViews(viewNames);
 
 ### isScreenshotPolicyEnabled( callback )
 <details>
-<summary>Use this API to determine of automatic screenshots are enabled by policy.</summary>
+<summary>Use this API to determine wheter automatic screenshots are enabled by policy.</summary>
 
 Parameters:
--  callback is a function which expects a boolean value
+-  callback is a function that expects a Boolean value.
 
-Returns YES if screenshots are enabled by policy.
+Returns YES when screenshots are enabled by policy.
 
 ```
 AXASDK.isScreenshotPolicyEnabled((isEnabled) => {
@@ -785,12 +779,12 @@ AXASDK.isScreenshotPolicyEnabled((isEnabled) => {
 <summary>Use this API to add a custom network event in the current session.</summary>
 
 Parameters:
-- url is a string reprentation of the network URL to be logged
-- status is an integer value indicating the status, e.g. 200, 404, etc.
-- responseTime is an integer value representing the response time
-- inBytes is an integer value representing the number of bytes input
-- outBytes is an integer value representing the number of bytes output
-- completionBlock is a function expecting a BOOL completed, and an errorString
+- url is a string reprentation of the network URL to be logged.
+- status is an integer value indicating the status, for example 200, 404, and so on.
+- responseTime is an integer value representing the response time.
+- inBytes is an integer value representing the number of bytes input.
+- outBytes is an integer value representing the number of bytes output.
+- completionBlock is a function expecting a BOOL completed, and an errorString.
 
 Successful execution of the method will have completed as YES and errorString as an empty string.
 In case of failure completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
@@ -823,13 +817,13 @@ AXASDK.logNetworkEvent( url, status, responseTime, inBytes, outBytes, (completed
 <summary>Use this API to add a custom text event in the current session.</summary>
 
 Parameters:
-- metricName is a string metric name
-- metricValue is a string metric value
-- attributes is a Dictionary which can be used to send any extra parameters
-- completionBlock is a function expecting a BOOL completed, and an errorString
+- metricName is a string metric name.
+- metricValue is a string metric value.
+- attributes is a dictionary that you can use to send any extra parameters.
+- completionBlock is a function expecting a BOOL completed, and an errorString.
 
-Successful execution of the method will have completed as YES and errorString as an empty string.
-In case of failure completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
+Successful execution of the method completes as YES. The errorString is an empty string.
+In case of failure, execution of the method completes as NO. The errorString contains a message that includes a domain, code, and localizedDescription.
 
 ```
 var metricName = "ImageName";
@@ -857,13 +851,13 @@ AXASDK.logTextMetric( metricName, metricValue, attributes, (completed, errorStri
 <summary>Use this API to add a custom network event in the current session.</summary>
 
 Parameters:
-- metricName is a string metric name
-- metricValue is a string metric value
-- attributes is a Dictionary which can be used to send any extra parameters
+- metricName is a string metric name.
+- metricValue is a string metric value.
+- attributes is a dictionary that you can use to send any extra parameters
 - completionBlock is a function expecting a BOOL completed, and an errorString
 
-Successful execution of the method will have completed as YES and errorString as an empty string.
-In case of failure completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
+Successful execution of the method completes as YES. The errorString is an empty string.
+In case of failure, execution of the method completes as NO. The errorString contains a message that includes a domain, code, and localizedDescription.
 
 ```
 var metricName = "ImageWidth";
@@ -888,15 +882,15 @@ AXASDK.logTextMetric( metricName, metricValue, attributes, (completed, errorStri
 
 ### sendScreenShot( screenName, imageQuality, completionBlock )
 <details>
-<summary>Use this API to stop a transaction with a specific name.</summary>
+<summary>Use this API to stop a transaction that has a specific name.</summary>
 
 Parameters:
-- screenName is a non-empty string for the screen name
-- imageQuality is number indicating the quality of the image between 0.0 and 1.0, default is low-quality
-- completionBlock is a function expecting a BOOL completed, and an errorString
+- screenName is a non-empty string for the screen name.
+- imageQuality is number indicating the quality of the image between 0.0 and 1.0. The default is low-quality.
+- completionBlock is a function expecting a BOOL completed, and an errorString.
 
-Successful execution of the method will have completed as YES and errorString as an empty string.
-In case of failure completed is set to NO and errorString contains a message with a domain, code and localizedDescription.
+Successful execution of the method completes as YES. The errorString is an empty string.
+In case of failure, execution of the method completes as NO. The errorString contains a message that includes a domain, code, and localizedDescription.
 
 ```
 var screenName = "My custom Screen";
@@ -916,7 +910,7 @@ AXASDK.sendScreenShot(screenName, imageQuality, (completed, errorString) => {
 
 ```
 
-The following values for quality are defined:
+Here are the defined values for quality :
 - CAMAA_SCREENSHOT_QUALITY_HIGH
 - CAMAA_SCREENSHOT_QUALITY_MEDIUM
 - CAMAA_SCREENSHOT_QUALITY_LOW
@@ -929,18 +923,18 @@ The following values for quality are defined:
 <details>
 <summary>Use this API to force an upload event.</summary>
 
-An upload event sends all information collected since any previous upload event to the APM servers.
+An upload event sends all the information that the API collected since any previous upload event to the DX APM servers.
 
 Parameters:
-- callback is a function which expects a response object and an ErrorString.
+- callback is a function that expects a response object and an ErrorString.
 
-Response is a key,value paired object which contains:
-- the Key 'CAMDOResponseKey'  holds any URLResponse information
-- the key 'CAMDOTotalUploadedEvents'  holds the total number of events uploaded
+Response is a key/value paired object which contains:
+- the Key 'CAMDOResponseKey' holds any URLResponse information.
+- the key 'CAMDOTotalUploadedEvents' holds the total number of events uploaded.
 
-ErrorString is empty if the API call is completed, otherwise is a localized error description
+ErrorString is empty when the API call is completed. Otherwise, the ErrorString value is a localized error-description.
 ```
-AXASDK.uploadEvents((response, errorString) => {
+AXASDK.uploadEvents((response, errorString) => {ErrorString
     if (errorString) {
         // process error message
         console.log(`error: ${errorString}`)
@@ -953,7 +947,5 @@ AXASDK.uploadEvents((response, errorString) => {
 
 ```
 </details>
-
-
 
 
